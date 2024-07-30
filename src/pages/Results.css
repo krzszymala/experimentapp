@@ -1,0 +1,19 @@
+.results-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.results-container h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.results-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.results-container li {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
