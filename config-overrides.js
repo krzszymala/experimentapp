@@ -3,7 +3,7 @@ const { override, overrideDevServer } = require('customize-cra');
 const devServerConfig = () => config => {
   return {
     ...config,
-    allowedHosts: ['.yourdomain.com'],
+    allowedHosts: ['54.37.234.226/'],
   };
 };
 
