@@ -86,7 +86,8 @@ function Experiment() {
     }, infoDisplayTime);
   };
 
-  const handleAnswerSubmit = () => {
+  const handleAnswerSubmit = async (event) => {
+    event.preventDefault();
     console.log(`Answer submitted: ${answer}`);
     const answerData = {
       participantId,
@@ -102,6 +103,21 @@ function Experiment() {
     const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
     localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
     console.log('Response from localStorage:', answerData);
+
+    // Zapis odpowiedzi do bazy danych
+    try {
+      const response = await fetch('http://localhost:80/api/response', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(answerData),
+      });
+      const responseData = await response.json();
+      console.log('Response from server:', responseData);
+    } catch (error) {
+      console.error('Error saving response:', error);
+    }
 
     setAnswers([...answers, answerData]);
     setAnswer('');
@@ -176,7 +192,7 @@ function Experiment() {
           {showQuestion && (
             <div className="question-container">
               <h2>Co widziałeś na obrazku?</h2>
-              <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
+              <form onSubmit={handleAnswerSubmit}>
                 <ul className="options-list">
                   {options.map((option, index) => (
                     <li key={index}>

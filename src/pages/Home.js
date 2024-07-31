@@ -10,7 +10,7 @@ function Home() {
   const [meditationYears, setMeditationYears] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const participantData = {
       age,
@@ -20,11 +20,26 @@ function Home() {
       meditationYears: meditationExperience ? meditationYears : null,
     };
 
-    // Zapis danych uczestnika lokalnie w pamięci lokalnej
-    localStorage.setItem('participant', JSON.stringify(participantData));
-    console.log('Participant saved:', participantData);
+    try {
+      // Wysyłanie danych uczestnika do serwera
+      const response = await fetch('http://localhost:5000/api/participant', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(participantData),
+      });
 
-    navigate('/training', { state: { participantId: 'local' } });
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Participant saved to MongoDB:', data);
+        navigate('/training', { state: { participantId: data._id } });
+      } else {
+        console.error('Failed to save participant data to MongoDB');
+      }
+    } catch (error) {
+      console.error('Error saving participant data:', error);
+    }
   };
 
   return (
