@@ -21,7 +21,6 @@ function Home() {
     };
 
     try {
-      // Wysyłanie danych uczestnika do serwera
       const response = await fetch('http://localhost:5000/api/participant', {
         method: 'POST',
         headers: {
@@ -30,13 +29,13 @@ function Home() {
         body: JSON.stringify(participantData),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Participant saved to MongoDB:', data);
-        navigate('/training', { state: { participantId: data._id } });
-      } else {
-        console.error('Failed to save participant data to MongoDB');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
+
+      const result = await response.json();
+      console.log('Participant saved:', result);
+      navigate('/training', { state: { participantId: result._id } });
     } catch (error) {
       console.error('Error saving participant data:', error);
     }
