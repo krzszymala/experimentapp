@@ -49,3 +49,5 @@ app.listen(port, async () => {
   // Automatyczne otwieranie przeglądarki z adresem localhost:5000
   await open(`http://localhost:${port}`);
 });
+
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
