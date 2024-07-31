@@ -31,6 +31,19 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('Error connecting to MongoDB', error);
 });
 
+// Logowanie połączeń do MongoDB
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected to ' + process.env.MONGODB_URI);
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('Mongoose connection error: ' + err);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose disconnected');
+});
+
 // Serwowanie statycznych plików z katalogu build
 const buildPath = path.resolve(__dirname, '../build');
 app.use(express.static(buildPath));
@@ -51,3 +64,15 @@ app.listen(port, async () => {
 });
 
 console.log('MONGODB_URI:', process.env.MONGODB_URI);
+
+app.get('/test-db', async (req, res) => {
+  try {
+    const Test = mongoose.model('Test', new mongoose.Schema({ name: String }));
+    const testDoc = new Test({ name: 'Test' });
+    await testDoc.save();
+    const result = await Test.find();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
