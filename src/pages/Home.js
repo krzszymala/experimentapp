@@ -22,7 +22,7 @@ function Home() {
 
     try {
       // Wysyłanie danych uczestnika do serwera
-      const response = await fetch('http://localhost:5000/api/participant', {
+      const response = await fetch('http://localhost:80/api/participant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
