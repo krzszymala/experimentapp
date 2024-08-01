@@ -21,7 +21,7 @@ function Home() {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/participant', {
+      const response = await fetch('http://54.37.234.226:5000/api/answers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
