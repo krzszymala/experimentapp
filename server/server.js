@@ -15,9 +15,8 @@ const answerRoutes = require('./routes/answers');
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/participants', participantRoutes);
-app.use('/api/answers', answerRoutes);
 
-const mongoURI = process.env.MONGODB_URI || 'your-mongodb-uri-here';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://krzszymala:experimentapp765@cluster0.lrm2cep.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
