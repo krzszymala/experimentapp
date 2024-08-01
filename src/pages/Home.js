@@ -24,7 +24,7 @@ function Home() {
      console.log('Sending participant data:', participantData);
 
     try {
-      const response = await fetch('http://54.37.234.226:5000/api/answers', {
+      const response = await fetch('http://54.37.234.226:5000/api/participants', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
