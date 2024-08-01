@@ -20,6 +20,9 @@ function Home() {
       meditationYears: meditationExperience ? meditationYears : null,
     };
 
+     // Logowanie danych przed wysłaniem
+     console.log('Sending participant data:', participantData);
+
     try {
       const response = await fetch('http://54.37.234.226:5000/api/answers', {
         method: 'POST',
