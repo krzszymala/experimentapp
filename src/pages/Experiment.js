@@ -122,7 +122,8 @@ function Experiment() {
     // Zapis odpowiedzi lokalnie
     const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
     localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
-    console.log('Response from localStorage:', answerData);
+    console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
+
 
     saveResponse(answerData);
     setAnswers([...answers, answerData]);
