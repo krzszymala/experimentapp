@@ -119,15 +119,6 @@ function Experiment() {
     };
     console.log("Answer data being saved: ", answerData);
 
-    // Pobierz obecnie zapisane odpowiedzi
-    const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
-
-    // Sprawdź, czy odpowiedź już istnieje
-    const isDuplicate = savedAnswers.some(savedAnswer =>
-      savedAnswer.image === answerData.image &&
-      savedAnswer.exposureTime === answerData.exposureTime
-  );
-
     // Zapis odpowiedzi lokalnie
     const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
     localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
