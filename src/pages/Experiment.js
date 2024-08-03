@@ -119,11 +119,22 @@ function Experiment() {
     };
     console.log("Answer data being saved: ", answerData);
 
-    // Zapis odpowiedzi lokalnie
+    // Pobierz obecnie zapisane odpowiedzi
     const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
-    localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
-    console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
 
+    // Sprawdź, czy odpowiedź już istnieje
+    const isDuplicate = savedAnswers.some(savedAnswer =>
+      savedAnswer.image === answerData.image &&
+      savedAnswer.exposureTime === answerData.exposureTime
+    );
+
+    if (!isDuplicate) {
+      // Zapis odpowiedzi lokalnie
+      localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
+      console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
+    } else {
+      console.log('Duplicate answer detected, not saving.');
+    }
 
     saveResponse(answerData);
     setAnswers([...answers, answerData]);
