@@ -3,16 +3,16 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './Results.css';
 
 const images = [
-  { src: '/images/square.png', correctAnswer: 'Kwadrat' },
   { src: '/images/triangle.png', correctAnswer: 'Trójkąt' },
-  { src: '/images/smile.png', correctAnswer: 'Uśmiech' },
   { src: '/images/apple.png', correctAnswer: 'Jabłko' },
   { src: '/images/disable.png', correctAnswer: 'Osoba z niepełnosprawnością' },
   { src: '/images/joy.png', correctAnswer: 'Radość' },
   { src: '/images/sadness.png', correctAnswer: 'Smutek' },
   { src: '/images/sun.png', correctAnswer: 'Słońce' },
   { src: '/images/rocks.png', correctAnswer: 'Skały' },
-  { src: '/images/orange.png', correctAnswer: 'Pomarańcza' }
+  { src: '/images/orange.png', correctAnswer: 'Pomarańcza' },
+  { src: '/images/scared.png', correctAnswer: 'Strach' },
+  { src: '/images/dog.png', correctAnswer: 'Pies' }
 ];
 
 const exposureTimes = [34, 50, 100, 150];
