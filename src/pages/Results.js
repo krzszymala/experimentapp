@@ -15,7 +15,7 @@ const images = [
   { src: '/images/orange.png', correctAnswer: 'Pomarańcza' }
 ];
 
-const exposureTimes = [50, 90, 120, 150];
+const exposureTimes = [34, 50, 100, 150];
 
 const Results = () => {
   const location = useLocation();
