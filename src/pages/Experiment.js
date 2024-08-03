@@ -132,6 +132,10 @@ function Experiment() {
       // Zapis odpowiedzi lokalnie
       localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
       console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
+    
+      saveResponse(answerData); // Zapis odpowiedzi na serwerze tylko jeśli nie jest duplikatem
+
+
     } else {
       console.log('Duplicate answer detected, not saving.');
     }
