@@ -21,6 +21,7 @@ const Results = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [results, setResults] = useState([]);
+  const [feedback, setFeedback] = useState('');
 
   useEffect(() => {
     const storedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
@@ -33,14 +34,24 @@ const Results = () => {
     navigate('/');
   };
 
+  const handleFeedbackChange = (e) => {
+    setFeedback(e.target.value);
+  };
+
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    // Funkcja do wysyłania maila
+    const mailto = `mailto:krz.szymala@gmail.com?subject=Opinia%20na%20temat%20badania&body=${encodeURIComponent(feedback)}`;
+    window.location.href = mailto;
+  };
+
   const getCorrectAnswersCount = (time) => {
-    // Tworzymy zestaw, aby uniknąć liczenia duplikatów
     const uniqueAnswers = new Set();
     results.forEach(answer => {
       if (answer.exposureTime === time) {
         const image = images.find(img => img.src === answer.image);
         if (image && answer.answer === image.correctAnswer) {
-          uniqueAnswers.add(answer.image); // dodajemy tylko unikalne obrazy
+          uniqueAnswers.add(answer.image);
         }
       }
     });
@@ -58,6 +69,18 @@ const Results = () => {
       </ul>
       <p>Dziękujemy za udział w badaniu!</p>
       <button onClick={handleHomeClick} className="home-button">Strona główna</button>
+      <h2>Podziel się swoją opinią na temat badania lub przekaż swoje uwagi</h2>
+      <form onSubmit={handleFeedbackSubmit} className="feedback-form">
+        <textarea
+          value={feedback}
+          onChange={handleFeedbackChange}
+          placeholder="Wpisz tutaj swoje uwagi..."
+          rows="4"
+          cols="50"
+        />
+        <br />
+        <button type="submit" className="submit-feedback-button">Wyślij</button>
+      </form>
     </div>
   );
 };
