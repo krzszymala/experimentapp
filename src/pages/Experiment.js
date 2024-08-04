@@ -132,15 +132,13 @@ function Experiment() {
       // Zapis odpowiedzi lokalnie
       localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
       console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
-    
-      saveResponse(answerData); // Zapis odpowiedzi na serwerze tylko jeśli nie jest duplikatem
-
-
+      
+      // Zapis odpowiedzi na serwerze tylko jeśli nie jest duplikatem
+      saveResponse(answerData);
     } else {
       console.log('Duplicate answer detected, not saving.');
     }
 
-    saveResponse(answerData);
     setAnswers([...answers, answerData]);
     setAnswer('');
     setSelectedOption('');
