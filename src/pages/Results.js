@@ -34,10 +34,17 @@ const Results = () => {
   };
 
   const getCorrectAnswersCount = (time) => {
-    return results.filter(answer => {
-      const image = images.find(img => img.src === answer.image);
-      return image && answer.exposureTime === time && answer.answer === image.correctAnswer;
-    }).length;
+    // Tworzymy zestaw, aby uniknąć liczenia duplikatów
+    const uniqueAnswers = new Set();
+    results.forEach(answer => {
+      if (answer.exposureTime === time) {
+        const image = images.find(img => img.src === answer.image);
+        if (image && answer.answer === image.correctAnswer) {
+          uniqueAnswers.add(answer.image); // dodajemy tylko unikalne obrazy
+        }
+      }
+    });
+    return uniqueAnswers.size;
   };
 
   return (
