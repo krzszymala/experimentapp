@@ -83,7 +83,7 @@ function Home() {
         </label>
         {meditationExperience && (
           <label>
-            Lata medytacji:
+            Lata praktyki:
             <select value={meditationYears} onChange={(e) => setMeditationYears(e.target.value)} required>
               <option value="">Wybierz</option>
               {[...Array(90).keys()].map(i => (

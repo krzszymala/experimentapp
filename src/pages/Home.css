@@ -62,3 +62,14 @@ input[type="checkbox"] {
 .submit-button:hover {
   background-color: #e04a4f;
 }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .submit-button {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}

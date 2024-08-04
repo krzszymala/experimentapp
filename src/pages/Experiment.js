@@ -176,13 +176,11 @@ function Experiment() {
         <div className="registration-container">
           <h1>Instrukcje</h1>
           <p className="study-description">
-            W ramach tego eksperymentu będą prezentowane obrazy o różnych czasach ekspozycji. Po każdej prezentacji pojawi się pytanie o to, co zobaczyłeś na obrazku. Jeśli nie jesteś pewien odpowiedzi, proszę, nie strzelaj – wybierz opcję "nie wiem".
+            W ramach tego eksperymentu będą prezentowane obrazy o różnych czasach ekspozycji. Po każdej prezentacji pojawi się pytanie o to, co pojawiło się na ekranie. Jeśli nie jesteś pewien odpowiedzi, proszę, nie strzelaj – wybierz opcję "nie wiem".
             <br /><br />
             Upewnij się, że wykonujesz eksperyment w odpowiednio oświetlonym pomieszczeniu. Jeśli jest to w godzinach nocnych, zaleca się zapalenie światła, aby zapewnić dobre warunki widoczności.
           </p>
-          <div className="warning-box">
-            <strong>Ostrzeżenie:</strong> Osoby cierpiące na epilepsję nie powinny wykonywać tego eksperymentu.
-          </div>
+          
           <button onClick={handleStart} className="start-button">
             Start
           </button>
