@@ -73,3 +73,69 @@ input[type="checkbox"] {
     font-size: 0.875rem;
   }
 }
+/* Dodajemy styl dla przycisku "Informacje o badaniu" */
+.info-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background-color: #0056b3;
+}
+
+/* Styl dla dymka z informacjami o badaniu */
+.info-popup {
+  display: none; /* Domyślnie ukrywamy dymek */
+  position: absolute;
+  bottom: 50px;
+  right: 10px;
+  width: 90%;
+  max-width: 300px;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  z-index: 10;
+}
+
+.info-popup.visible {
+  display: block; /* Pokazujemy dymek, gdy jest aktywny */
+}
+
+.info-popup h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.info-popup p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0;
+}
+
+/* Styl dla krzyżyka zamykającego dymek */
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+

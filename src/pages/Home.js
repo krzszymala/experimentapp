@@ -8,6 +8,7 @@ function Home() {
   const [education, setEducation] = useState('');
   const [meditationExperience, setMeditationExperience] = useState(false);
   const [meditationYears, setMeditationYears] = useState('');
+  const [infoVisible, setInfoVisible] = useState(false); // Dodany stan do zarządzania widocznością dymka
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,8 +21,7 @@ function Home() {
       meditationYears: meditationExperience ? meditationYears : null,
     };
 
-     // Logowanie danych przed wysłaniem
-     console.log('Sending participant data:', participantData);
+    console.log('Sending participant data:', participantData);
 
     try {
       const response = await fetch('http://54.37.234.226:5000/api/participants/saveParticipant', {
@@ -44,8 +44,16 @@ function Home() {
     }
   };
 
+  const toggleInfo = () => {
+    setInfoVisible(!infoVisible); // Przełączanie widoczności dymka
+  };
+
+  const closeInfo = () => {
+    setInfoVisible(false); // Zamknięcie dymka
+  };
+
   return (
-    <div className="registration-container">
+    <div className="registration-container" style={{ position: 'relative' }}>
       <h1>Rejestracja</h1>
       <form onSubmit={handleSubmit} className="registration-form">
         <label>
@@ -94,6 +102,19 @@ function Home() {
         )}
         <button type="submit" className="submit-button">Zarejestruj</button>
       </form>
+      <button className="info-button" onClick={toggleInfo}>Informacje o badaniu</button>
+      {infoVisible && (
+        <div className="info-popup visible">
+          <button className="close-button" onClick={closeInfo}>×</button>
+          <h2>Informacje o badaniu</h2>
+          <p>
+            Nazywam się Krzysztof Szymała, jestem studentem kognitywistyki na Uniwersytecie Śląskim w Katowicach. 
+            Moje badanie dotyczy różnic w percepcji bodźców wzrokowych u osób medytujących i niemeditujących i jest częścią pracy magisterskiej,
+            której tytuł to "Wpływ technik medytacyjnych na wybrane procesy poznawcze człowieka".
+            Udział w badaniu pomoże w zgłębianiu wpływu medytacji na nasze zdolności percepcyjne.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
