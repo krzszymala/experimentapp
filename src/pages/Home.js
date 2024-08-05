@@ -3,13 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Home.css';
 
-const [started, setStarted] = useState(false);
-
-const handleStart = () => {
-  setStarted(true);
-  setShowInfo(true);
-};
-
 function Home() {
   const { t, i18n } = useTranslation();
   const [age, setAge] = useState('');
@@ -20,6 +13,7 @@ function Home() {
   const [infoVisible, setInfoVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [showInfo, setShowInfo] = useState(false); // Dodano tę linię
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

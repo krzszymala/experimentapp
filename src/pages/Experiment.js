@@ -33,6 +33,7 @@ function Experiment() {
   const [answer, setAnswer] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [options, setOptions] = useState([]);
+  const [started, setStarted] = useState(false); // Dodano zmienną `started`
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,6 +68,7 @@ function Experiment() {
   }, [showQuestion, currentImageIndex]);
 
   const handleStart = () => {
+    setStarted(true); // Ustawienie `started` na true
     setShowInfo(true);
   };
 
@@ -127,57 +129,26 @@ function Experiment() {
 
   return (
     <div className="experiment-container">
-      {!started ? (
-        <div className="instructions">
-          <h2>{t('experiment_instructions_title')}</h2>
-          <p>{t('experiment_instructions_text')}</p>
-          <button onClick={handleStart} className="start-button">{t('experiment_start')}</button>
+      <h1>{t('experiment_instructions_title')}</h1>
+      <p>{t('experiment_instructions_text')}</p>
+      {!showInfo && !started && (
+        <button onClick={handleStart}>{t('start_experiment')}</button>
+      )}
+      {showInfo && (
+        <div className="info-popup">
+          <p>{t('experiment_info_text')}</p>
         </div>
-      ) : (
-        <>
-          {showInfo && (
-            <div className="info-container">
-              <h2>{t('experiment_exposure_time')}{exposureTimes[currentRound]} ms</h2>
-            </div>
-          )}
-          {!showInfo && !showQuestion && (
-            <div className="image-container">
-              {images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image.src}
-                  alt={t(`experiment_options.${image.correctAnswer}`)}
-                  className="image"
-                  style={{
-                    display: index === currentImageIndex && !isPause && !showQuestion ? 'block' : 'none'
-                  }}
-                />
-              ))}
-            </div>
-          )}
-          {showQuestion && (
-            <div className="question-container">
-              <h2>{t('experiment_question')}</h2>
-              <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
-                <ul className="options-list">
-                  {options.map((option, index) => (
-                    <li key={index}>
-                      <button
-                        type="button"
-                        className={option === selectedOption ? 'selected' : ''}
-                        onClick={() => handleOptionClick(option)}
-                      >
-                        {t(`experiment_options.${option}`)}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-                <br />
-                <button type="submit" className="submit-button">{t('experiment_submit_answer')}</button>
-              </form>
-            </div>
-          )}
-        </>
+      )}
+      {showQuestion && (
+        <div className="question-container">
+          <p>{t('select_the_correct_option')}</p>
+          {options.map((option, index) => (
+            <button key={index} onClick={() => handleOptionClick(option)}>
+              {option}
+            </button>
+          ))}
+          <button onClick={handleAnswerSubmit}>{t('submit_answer')}</button>
+        </div>
       )}
     </div>
   );
