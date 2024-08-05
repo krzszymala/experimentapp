@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/participants', participantRoutes);
 
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://krzszymala:experimentapp765@cluster0.lrm2cep.mongodb.net/myDatabase?retryWrites=true&w=majority&appName=Cluster0\n';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://krzszymala:experimentapp765@cluster0.lrm2cep.mongodb.net/myDatabase?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
