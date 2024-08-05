@@ -19,6 +19,8 @@ i18n
     backend: {
         loadPath: '/locales/{{lng}}/translation.json', // Upewnij się, że ta ścieżka jest poprawna
     },
+    ns: ['translation'], // Dodaj tę linię
+    defaultNS: 'translation', // Dodaj tę linię
     interpolation: {
       escapeValue: false, // React already does escaping
     },
