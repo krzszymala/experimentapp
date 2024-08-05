@@ -3,10 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './Training.css';
 
 const images = [
-  { src: '/images/square.png', name: 'kwadrat' },
-  { src: '/images/circle.png', name: 'koło' },
-  { src: '/images/cat.png', name: 'kot' },
-  { src: '/images/smile.png', name: 'uśmiech' },
+  { src: '/images/square.png', name: 'Kwadrat' },
+  { src: '/images/circle.png', name: 'Koło' },
+  { src: '/images/cat.png', name: 'Kot' },
+  { src: '/images/smile.png', name: 'Uśmiech' },
 ];
 
 const randomWords = [
