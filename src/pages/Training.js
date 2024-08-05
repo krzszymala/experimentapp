@@ -1,4 +1,3 @@
-// Training.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Training.css';
@@ -78,37 +77,8 @@ function Training() {
     }, initialPauseTime);
   };
 
-  const handleAnswerSubmit = async () => {
+  const handleAnswerSubmit = () => {
     console.log(`Answer submitted: ${answer}`);
-    console.log("Submitting answer with participant ID: ", participantId);
-    const answerData = {
-      participantId,
-      image: images[currentImageIndex].name,
-      answer,
-      stage: 1,
-      phase: 'training' // Dodanie pola phase z wartością training
-    };
-    console.log("Answer data being sent: ", answerData);
-
-    try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/answers`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(answerData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
-
-      const result = await response.json();
-      console.log('Response from server:', result);
-    } catch (error) {
-      console.error('Error saving answer:', error);
-    }
-
     setAnswer('');
     setSelectedOption('');
     setShowQuestion(false);
