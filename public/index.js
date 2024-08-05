@@ -17,7 +17,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
     backend: {
-        loadPath: '/locales/{{lng}}/{{ns}}.json', // Upewnij się, że ta ścieżka jest poprawna
+        loadPath: '/locales/{{lng}}/translation.json', // Upewnij się, że ta ścieżka jest poprawna
     },
     interpolation: {
       escapeValue: false, // React already does escaping
