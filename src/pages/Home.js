@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Home.css';
 
+const [started, setStarted] = useState(false);
+
+const handleStart = () => {
+  setStarted(true);
+  setShowInfo(true);
+};
+
 function Home() {
   const { t, i18n } = useTranslation();
   const [age, setAge] = useState('');
