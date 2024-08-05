@@ -142,11 +142,16 @@ input[type="checkbox"] {
 /* Media query dla mniejszych ekranów */
 @media (max-width: 768px) {
   .info-button {
-    bottom: 60px; /* Przesuwamy przycisk wyżej na urządzeniach mobilnych */
+    bottom: 10px; /* Przycisk pozostaje na dole */
     right: 10px;
   }
 
+  .info-popup {
+    bottom: 50px; /* Dymek pozostaje nad przyciskiem */
+  }
+
   .submit-button {
+    margin-bottom: 50px; /* Dodajemy odstęp poniżej przycisku Zarejestruj */
     padding: 0.5rem 1.5rem;
     font-size: 0.875rem;
   }
