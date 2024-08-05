@@ -1,27 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Training.css';
 
 const images = [
-  { src: '/images/square.png', name: 'Kwadrat' },
-  { src: '/images/circle.png', name: 'Koło' },
-  { src: '/images/cat.png', name: 'Kot' },
-  { src: '/images/smile.png', name: 'Uśmiech' },
+  { src: '/images/square.png', name: 'Square' },
+  { src: '/images/circle.png', name: 'Circle' },
+  { src: '/images/cat.png', name: 'Cat' },
+  { src: '/images/smile.png', name: 'Smile' },
 ];
 
 const randomWords = [
-  'Dom', 'Samochód', 'Telefon', 'Jabłko', 'Komputer', 
-  'Książka', 'Długopis', 'Zegarek', 'Pies', 'Zegar',
-  'Rower', 'Drzwi', 'Lampa', 'Stół', 'Krzesło',
-  'Telewizor', 'Klucz', 'Okno', 'Buty', 'Kwiat'
+  'House', 'Car', 'Phone', 'Apple', 'Computer', 
+  'Book', 'Pen', 'Watch', 'Dog', 'Clock',
+  'Bike', 'Door', 'Lamp', 'Table', 'Chair',
+  'TV', 'Key', 'Window', 'Shoes', 'Flower'
 ];
 
-const displayTime = 300; // Czas wyświetlania w milisekundach (300 ms)
-const initialPauseTime = 3000; // Początkowa przerwa przed pierwszym obrazem w milisekundach (3 sekundy)
-const pauseTime = 3000; // Czas przerwy w milisekundach (3 sekundy)
-const questionDelayTime = 1000; // Czas opóźnienia przed wyświetleniem pytania w milisekundach (1 sekunda)
+const displayTime = 300; // Time to display image in milliseconds (300 ms)
+const initialPauseTime = 3000; // Initial pause before first image in milliseconds (3 seconds)
+const pauseTime = 3000; // Pause time in milliseconds (3 seconds)
+const questionDelayTime = 1000; // Delay before showing question in milliseconds (1 second)
 
 function Training() {
+  const { t } = useTranslation();
   const location = useLocation();
   const { participantId } = location.state || {};
   console.log("Participant ID in Training: ", participantId);
@@ -47,69 +49,85 @@ function Training() {
         }, questionDelayTime);
       }, displayTime);
     }
-
     return () => clearTimeout(timer);
-  }, [isPause, navigate, started, showQuestion, currentImageIndex]);
-
-  // Memoize the generateOptions function
-  const generateOptions = useCallback(() => {
-    const correctAnswer = images[currentImageIndex].name;
-    const incorrectAnswers = randomWords
-      .filter(word => word !== correctAnswer)
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-    const allOptions = [...incorrectAnswers, correctAnswer].sort(() => 0.5 - Math.random());
-    setOptions([...allOptions, 'Nie wiem']);
-  }, [currentImageIndex]);
+  }, [started, isPause, showQuestion, currentImageIndex]);
 
   useEffect(() => {
     if (showQuestion) {
-      generateOptions();
+      const shuffledWords = [...randomWords].sort(() => Math.random() - 0.5);
+      const options = shuffledWords.slice(0, 4);
+      options.push(images[currentImageIndex].name);
+      setOptions(options.sort(() => Math.random() - 0.5));
     }
-  }, [showQuestion, generateOptions]);
+  }, [showQuestion, currentImageIndex]);
 
   const handleStart = () => {
     setStarted(true);
-    console.log('Starting training...');
     setTimeout(() => {
       setIsPause(false);
-      console.log('Initial pause ended, showing first image');
     }, initialPauseTime);
   };
 
-  const handleAnswerSubmit = () => {
-    console.log(`Answer submitted: ${answer}`);
-    setAnswer('');
-    setSelectedOption('');
-    setShowQuestion(false);
-    if (currentImageIndex + 1 === images.length) {
-      navigate('/experiment', { state: { participantId } }); // Przekazanie participantId do Experiment.js
-    } else {
-      setTimeout(() => {
-        setIsPause(false);
-        setCurrentImageIndex(prevIndex => prevIndex + 1);
-        console.log('Pause ended, showing next image');
-      }, pauseTime);
-    }
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
   };
 
-  const handleOptionClick = (option) => {
-    setAnswer(option);
-    setSelectedOption(option);
+  const handleAnswerSubmit = async () => {
+    if (!selectedOption) {
+      return;
+    }
+
+    const data = {
+      participantId,
+      imageName: images[currentImageIndex].name,
+      answer: selectedOption,
+      isCorrect: selectedOption === images[currentImageIndex].name,
+    };
+
+    console.log('Submitting answer:', data);
+
+    try {
+      const response = await fetch('http://54.37.234.226:5000/api/answers/saveAnswer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log('Answer saved:', result);
+
+      if (currentImageIndex < images.length - 1) {
+        setCurrentImageIndex(currentImageIndex + 1);
+        setIsPause(true);
+        setSelectedOption('');
+        setShowQuestion(false);
+        setTimeout(() => {
+          setIsPause(false);
+        }, pauseTime);
+      } else {
+        navigate('/summary');
+      }
+    } catch (error) {
+      console.error('Error saving answer:', error);
+    }
   };
 
   return (
     <div className="training-container">
       {!started ? (
-        <div className="registration-container">
-          <h1>Instrukcje</h1>
-          <p className="study-description">
-            Faza treningowa pokaże Ci na czym polega eksperyment. Na ekranie będą się wyświetlać obrazy o czasie ekspozycji 300 ms. Po każdej prezentacji pojawi się pytanie o to, co pojawiło się na ekranie. Jeśli nie jesteś pewien odpowiedzi, proszę, nie strzelaj – wybierz opcję "nie wiem".
-            <br /><br />
-            Upewnij się, że wykonujesz eksperyment w odpowiednio oświetlonym pomieszczeniu. Jeśli jest to w godzinach nocnych, zaleca się zapalenie światła, aby zapewnić dobre warunki widoczności.
+        <div className="instructions">
+          <h2>{t('training_instructions_title')}</h2>
+          <p>
+            {t('training_instructions_text')}
           </p>
           <button onClick={handleStart} className="start-button">
-            Start
+            {t('training_start')}
           </button>
         </div>
       ) : (
@@ -131,7 +149,7 @@ function Training() {
           )}
           {showQuestion && (
             <div className="question-container">
-              <h2>Co widziałeś na obrazku?</h2>
+              <h2>{t('training_question')}</h2>
               <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
                 <ul className="options-list">
                   {options.map((option, index) => (
@@ -147,7 +165,7 @@ function Training() {
                   ))}
                 </ul>
                 <br />
-                <button type="submit" className="submit-button">Zatwierdź odpowiedź</button>
+                <button type="submit" className="submit-button">{t('training_submit_answer')}</button>
               </form>
             </div>
           )}

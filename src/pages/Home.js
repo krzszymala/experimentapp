@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Home.css';
 
 function Home() {
+  const { t, i18n } = useTranslation();
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [education, setEducation] = useState('');
   const [meditationExperience, setMeditationExperience] = useState(false);
   const [meditationYears, setMeditationYears] = useState('');
-  const [infoVisible, setInfoVisible] = useState(false); // Dodany stan do zarządzania widocznością dymka
+  const [infoVisible, setInfoVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setError('');
+
     const participantData = {
       age,
       gender,
@@ -33,7 +42,7 @@ function Home() {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(t('network_error'));
       }
 
       const result = await response.json();
@@ -41,80 +50,98 @@ function Home() {
       navigate('/training', { state: { participantId: result._id } });
     } catch (error) {
       console.error('Error saving participant data:', error);
+      setError(error.message || t('unknown_error'));
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const toggleInfo = () => {
-    setInfoVisible(!infoVisible); // Przełączanie widoczności dymka
-  };
+  const toggleInfo = () => setInfoVisible(!infoVisible);
+  const closeInfo = () => setInfoVisible(false);
+  const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
-  const closeInfo = () => {
-    setInfoVisible(false); // Zamknięcie dymka
+  const generateOptions = (count) => {
+    return Array.from({ length: count }, (_, i) => (
+      <option key={i + 1} value={i + 1}>{i + 1}</option>
+    ));
   };
 
   return (
     <div className="registration-container" style={{ position: 'relative' }}>
-      <h1>Rejestracja</h1>
+      <h1>{t('registration')}</h1>
       <form onSubmit={handleSubmit} className="registration-form">
         <label>
-          Wiek:
+          {t('age')}
           <select value={age} onChange={(e) => setAge(e.target.value)} required>
-            <option value="">Wybierz</option>
-            {[...Array(73).keys()].map(i => (
-              <option key={i + 18} value={i + 18}>{i + 18}</option>
-            ))}
+            <option value="">{t('select')}</option>
+            {generateOptions(100)}
           </select>
         </label>
         <label>
-          Płeć:
+          {t('gender')}
           <select value={gender} onChange={(e) => setGender(e.target.value)} required>
-            <option value="">Wybierz</option>
-            <option value="male">Mężczyzna</option>
-            <option value="female">Kobieta</option>
+            <option value="">{t('select')}</option>
+            <option value="male">{t('male')}</option>
+            <option value="female">{t('female')}</option>
+            <option value="other">{t('other')}</option>
           </select>
         </label>
         <label>
-          Wykształcenie:
+          {t('education')}
           <select value={education} onChange={(e) => setEducation(e.target.value)} required>
-            <option value="">Wybierz</option>
-            <option value="none">Brak wykształcenia</option>
-            <option value="primary">Podstawowe</option>
-            <option value="middle">Gimnazjalne</option>
-            <option value="vocational">Zawodowe</option>
-            <option value="secondary">Średnie</option>
-            <option value="higher">Wyższe</option>
+            <option value="">{t('select')}</option>
+            <option value="none">{t('none')}</option>
+            <option value="primary">{t('primary')}</option>
+            <option value="middle">{t('middle')}</option>
+            <option value="vocational">{t('vocational')}</option>
+            <option value="secondary">{t('secondary')}</option>
+            <option value="higher">{t('higher')}</option>
           </select>
         </label>
         <label>
-          Doświadczenie w medytacji:
-          <input type="checkbox" checked={meditationExperience} onChange={(e) => setMeditationExperience(e.target.checked)} />
+          {t('meditation_experience')}
+          <input 
+            type="checkbox" 
+            checked={meditationExperience} 
+            onChange={(e) => setMeditationExperience(e.target.checked)} 
+          />
         </label>
         {meditationExperience && (
           <label>
-            Lata praktyki:
-            <select value={meditationYears} onChange={(e) => setMeditationYears(e.target.value)} required>
-              <option value="">Wybierz</option>
-              {[...Array(90).keys()].map(i => (
-                <option key={i + 1} value={i + 1}>{i + 1}</option>
-              ))}
+            {t('years_of_practice')}
+            <select 
+              value={meditationYears} 
+              onChange={(e) => setMeditationYears(e.target.value)} 
+              required
+            >
+              <option value="">{t('select')}</option>
+              {generateOptions(90)}
             </select>
           </label>
         )}
-        <button type="submit" className="submit-button">Zarejestruj</button>
+        <button type="submit" className="submit-button" disabled={isSubmitting}>
+          {isSubmitting ? t('submitting') : t('register')}
+        </button>
       </form>
-      <button className="info-button" onClick={toggleInfo}>Informacje o badaniu</button>
+      {error && <p className="error-message">{error}</p>}
+      <button className="info-button" onClick={toggleInfo}>{t('study_info')}</button>
       {infoVisible && (
         <div className="info-popup visible">
           <button className="close-button" onClick={closeInfo}>×</button>
-          <h2>Informacje o badaniu</h2>
-          <p>
-            Nazywam się Krzysztof Szymała, jestem studentem kognitywistyki na Uniwersytecie Śląskim w Katowicach. 
-            Moje badanie dotyczy różnic w percepcji bodźców wzrokowych u osób medytujących i niemedytujących. Jest częścią pracy magisterskiej,
-            której tytuł to "Wpływ technik medytacyjnych na wybrane procesy poznawcze człowieka".
-            Udział w badaniu pomoże w zgłębianiu wpływu medytacji na nasze zdolności percepcyjne.
-          </p>
+          <h2>{t('study_info')}</h2>
+          <p>{t('info_text')}</p>
         </div>
       )}
+      <div className="flag-container">
+        <button onClick={() => changeLanguage('en')} aria-label={t('change_to_english')}>
+          <img src="/images/uk.png" alt="" />
+          {t('english')}
+        </button>
+        <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
+          <img src="/images/pl.png" alt="" />
+          {t('polish')}
+        </button>
+      </div>
     </div>
   );
 }

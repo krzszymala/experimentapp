@@ -1,27 +1,29 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Experiment.css';
 
 const images = [
-  { src: '/images/triangle.png', correctAnswer: 'Trójkąt', options: ['Góry', 'Samochód', 'Księżyc'] },
-  { src: '/images/apple.png', correctAnswer: 'Jabłko', options: ['Pomarańcza', 'Drzewo', 'Pies'] },
-  { src: '/images/disable.png', correctAnswer: 'Osoba z niepełnosprawnością', options: ['Samochód', 'Stół', 'Kierowca wyścigówki'] },
-  { src: '/images/joy.png', correctAnswer: 'Radość', options: ['Smutek', 'Płacz', 'Strach'] },
-  { src: '/images/sadness.png', correctAnswer: 'Smutek', options: ['Radość', 'Strach', 'Złość'] },
-  { src: '/images/sun.png', correctAnswer: 'Słońce', options: ['Pomarańcza', 'Jabłko', 'Kot'] },
-  { src: '/images/rocks.png', correctAnswer: 'Skały', options: ['Droga', 'Dom', 'Wieloryb'] },
-  { src: '/images/orange.png', correctAnswer: 'Pomarańcza', options: ['Słońce', 'Dom', 'Uśmiech'] },
-  { src: '/images/scared.png', correctAnswer: 'Strach', options: ['Radość', 'Kot', 'Smutek']},
-  { src: '/images/dog.png', correctAnswer: 'Pies', options: ['Kot', 'Smutek', 'Sweter']}
+  { src: '/images/triangle.png', correctAnswer: 'triangle', options: ['mountains', 'car', 'moon'] },
+  { src: '/images/apple.png', correctAnswer: 'apple', options: ['orange', 'tree', 'dog'] },
+  { src: '/images/disable.png', correctAnswer: 'person_with_disability', options: ['car', 'table', 'race_car_driver'] },
+  { src: '/images/joy.png', correctAnswer: 'joy', options: ['sadness', 'crying', 'fear'] },
+  { src: '/images/sadness.png', correctAnswer: 'sadness', options: ['joy', 'fear', 'anger'] },
+  { src: '/images/sun.png', correctAnswer: 'sun', options: ['orange', 'apple', 'cat'] },
+  { src: '/images/rocks.png', correctAnswer: 'rocks', options: ['road', 'house', 'whale'] },
+  { src: '/images/orange.png', correctAnswer: 'orange', options: ['sun', 'house', 'smile'] },
+  { src: '/images/scared.png', correctAnswer: 'fear', options: ['joy', 'cat', 'sadness'] },
+  { src: '/images/dog.png', correctAnswer: 'dog', options: ['cat', 'sadness', 'sweater'] }
 ];
 
 const exposureTimes = [34, 50, 100, 150];
-const initialPauseTime = 3000; // Początkowa przerwa przed pierwszym obrazem w milisekundach (3 sekundy)
-const infoDisplayTime = 3000; // Czas wyświetlania informacji o czasie ekspozycji
-const pauseTime = 3000; // Czas przerwy w milisekundach (3 sekundy)
-const questionDelayTime = 1000; // Czas opóźnienia przed wyświetleniem pytania w milisekundach (1 sekunda)
+const initialPauseTime = 3000; // Initial pause before first image in milliseconds (3 seconds)
+const infoDisplayTime = 3000; // Time to display exposure time information
+const pauseTime = 3000; // Pause time in milliseconds (3 seconds)
+const questionDelayTime = 1000; // Delay before showing question in milliseconds (1 second)
 
 function Experiment() {
+  const { t } = useTranslation();
   const location = useLocation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentRound, setCurrentRound] = useState(0);
@@ -31,69 +33,68 @@ function Experiment() {
   const [answer, setAnswer] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const [options, setOptions] = useState([]);
-  const [started, setStarted] = useState(false);
-  const [answers, setAnswers] = useState([]);
   const navigate = useNavigate();
-
-  const participantId = location.state?.participantId;
-
-  useEffect(() => {
-    if (!participantId) {
-      navigate('/');
-      return;
-    }
-  }, [participantId, navigate]);
 
   useEffect(() => {
     let timer;
-    if (started && !isPause && !showQuestion && !showInfo) {
-      console.log(`Displaying image: ${images[currentImageIndex].correctAnswer} for ${exposureTimes[currentRound]} ms`);
+    if (showInfo) {
+      timer = setTimeout(() => {
+        setShowInfo(false);
+        setIsPause(false);
+      }, infoDisplayTime);
+    }
+    return () => clearTimeout(timer);
+  }, [showInfo]);
+
+  useEffect(() => {
+    let timer;
+    if (!isPause && !showQuestion && !showInfo) {
       timer = setTimeout(() => {
         setIsPause(true);
         setTimeout(() => {
           setShowQuestion(true);
-          console.log('Showing question');
         }, questionDelayTime);
       }, exposureTimes[currentRound]);
     }
-
     return () => clearTimeout(timer);
-  }, [isPause, navigate, started, showQuestion, showInfo, currentImageIndex, currentRound]);
-
-  const generateOptions = useCallback(() => {
-    const correctAnswer = images[currentImageIndex].correctAnswer;
-    const incorrectAnswers = images[currentImageIndex].options;
-    const allOptions = [...incorrectAnswers, correctAnswer].sort(() => 0.5 - Math.random());
-    setOptions([...allOptions, 'Nie wiem']);
-  }, [currentImageIndex]);
+  }, [isPause, showQuestion, showInfo, currentRound]);
 
   useEffect(() => {
     if (showQuestion) {
-      generateOptions();
+      const shuffledOptions = [...images[currentImageIndex].options, images[currentImageIndex].correctAnswer].sort(() => Math.random() - 0.5);
+      setOptions(shuffledOptions);
     }
-  }, [showQuestion, generateOptions]);
+  }, [showQuestion, currentImageIndex]);
 
   const handleStart = () => {
-    setStarted(true);
-    console.log('Starting experiment...');
     setShowInfo(true);
-    setTimeout(() => {
-      setShowInfo(false);
-      setTimeout(() => {
-        setIsPause(false);
-        console.log('Initial pause ended, showing first image');
-      }, pauseTime);
-    }, infoDisplayTime);
   };
 
-  const saveResponse = async (answerData) => {
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+  };
+
+  const handleAnswerSubmit = async () => {
+    if (!selectedOption) {
+      return;
+    }
+
+    const data = {
+      imageName: images[currentImageIndex].correctAnswer,
+      answer: selectedOption,
+      isCorrect: selectedOption === images[currentImageIndex].correctAnswer,
+      exposureTime: exposureTimes[currentRound]
+    };
+
+    console.log('Submitting answer:', data);
+
     try {
-      const response = await fetch('http://54.37.234.226:5000/api/participants/saveAnswer', {
+      const response = await fetch('http://54.37.234.226:5000/api/answers/saveAnswer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(answerData),
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
@@ -102,94 +103,41 @@ function Experiment() {
 
       const result = await response.json();
       console.log('Answer saved:', result);
-    } catch (error) {
-      console.error('Error saving answer data:', error);
-    }
-  };
 
-  const handleAnswerSubmit = () => {
-    console.log(`Answer submitted: ${answer}`);
-    const answerData = {
-      participantId,
-      image: images[currentImageIndex].src,
-      answer,
-      exposureTime: exposureTimes[currentRound],
-      stage: 1,
-      phase: 'experiment'
-    };
-    console.log("Answer data being saved: ", answerData);
-
-    // Pobierz obecnie zapisane odpowiedzi
-    const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
-
-    // Sprawdź, czy odpowiedź już istnieje
-    const isDuplicate = savedAnswers.some(savedAnswer =>
-      savedAnswer.image === answerData.image &&
-      savedAnswer.exposureTime === answerData.exposureTime
-    );
-
-    if (!isDuplicate) {
-      // Zapis odpowiedzi lokalnie
-      localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
-      console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
-      
-      // Zapis odpowiedzi na serwerze tylko jeśli nie jest duplikatem
-      saveResponse(answerData);
-    } else {
-      console.log('Duplicate answer detected, not saving.');
-    }
-
-    setAnswers([...answers, answerData]);
-    setAnswer('');
-    setSelectedOption('');
-    setShowQuestion(false);
-    if (currentImageIndex + 1 === images.length) {
-      if (currentRound + 1 === exposureTimes.length) {
-        navigate('/results', { state: { participantId, answers: [...answers, answerData] } }); // Pass the complete answers list
-      } else {
-        setCurrentRound(prevRound => prevRound + 1);
-        setCurrentImageIndex(0);
+      if (currentImageIndex < images.length - 1) {
+        setCurrentImageIndex(currentImageIndex + 1);
+        setIsPause(true);
+        setSelectedOption('');
+        setShowQuestion(false);
         setShowInfo(true);
-        setTimeout(() => {
-          setShowInfo(false);
-          setTimeout(() => {
-            setIsPause(false);
-          }, pauseTime);
-        }, infoDisplayTime);
+      } else if (currentRound < exposureTimes.length - 1) {
+        setCurrentImageIndex(0);
+        setCurrentRound(currentRound + 1);
+        setIsPause(true);
+        setSelectedOption('');
+        setShowQuestion(false);
+        setShowInfo(true);
+      } else {
+        navigate('/summary');
       }
-    } else {
-      setTimeout(() => {
-        setIsPause(false);
-        setCurrentImageIndex(prevIndex => prevIndex + 1);
-      }, pauseTime);
+    } catch (error) {
+      console.error('Error saving answer:', error);
     }
-  };
-
-  const handleOptionClick = (option) => {
-    setAnswer(option);
-    setSelectedOption(option);
   };
 
   return (
     <div className="experiment-container">
       {!started ? (
-        <div className="registration-container">
-          <h1>Instrukcje</h1>
-          <p className="study-description">
-            W ramach tego eksperymentu będą prezentowane obrazy o różnych czasach ekspozycji. Po każdej prezentacji pojawi się pytanie o to, co pojawiło się na ekranie. Jeśli nie jesteś pewien odpowiedzi, proszę, nie strzelaj – wybierz opcję "nie wiem".
-            <br /><br />
-            Upewnij się, że wykonujesz eksperyment w odpowiednio oświetlonym pomieszczeniu. Jeśli jest to w godzinach nocnych, zaleca się zapalenie światła, aby zapewnić dobre warunki widoczności.
-          </p>
-          
-          <button onClick={handleStart} className="start-button">
-            Start
-          </button>
+        <div className="instructions">
+          <h2>{t('experiment_instructions_title')}</h2>
+          <p>{t('experiment_instructions_text')}</p>
+          <button onClick={handleStart} className="start-button">{t('experiment_start')}</button>
         </div>
       ) : (
         <>
           {showInfo && (
             <div className="info-container">
-              <h2>Czas ekspozycji: {exposureTimes[currentRound]} ms</h2>
+              <h2>{t('experiment_exposure_time')}{exposureTimes[currentRound]} ms</h2>
             </div>
           )}
           {!showInfo && !showQuestion && (
@@ -198,7 +146,7 @@ function Experiment() {
                 <img
                   key={index}
                   src={image.src}
-                  alt={image.correctAnswer}
+                  alt={t(`experiment_options.${image.correctAnswer}`)}
                   className="image"
                   style={{
                     display: index === currentImageIndex && !isPause && !showQuestion ? 'block' : 'none'
@@ -209,7 +157,7 @@ function Experiment() {
           )}
           {showQuestion && (
             <div className="question-container">
-              <h2>Co widziałeś na obrazku?</h2>
+              <h2>{t('experiment_question')}</h2>
               <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
                 <ul className="options-list">
                   {options.map((option, index) => (
@@ -219,13 +167,13 @@ function Experiment() {
                         className={option === selectedOption ? 'selected' : ''}
                         onClick={() => handleOptionClick(option)}
                       >
-                        {option}
+                        {t(`experiment_options.${option}`)}
                       </button>
                     </li>
                   ))}
                 </ul>
                 <br />
-                <button type="submit" className="submit-button">Zatwierdź odpowiedź</button>
+                <button type="submit" className="submit-button">{t('experiment_submit_answer')}</button>
               </form>
             </div>
           )}

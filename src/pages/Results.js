@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Results.css';
 
 const images = [
-  { src: '/images/triangle.png', correctAnswer: 'Trójkąt' },
-  { src: '/images/apple.png', correctAnswer: 'Jabłko' },
-  { src: '/images/disable.png', correctAnswer: 'Osoba z niepełnosprawnością' },
-  { src: '/images/joy.png', correctAnswer: 'Radość' },
-  { src: '/images/sadness.png', correctAnswer: 'Smutek' },
-  { src: '/images/sun.png', correctAnswer: 'Słońce' },
-  { src: '/images/rocks.png', correctAnswer: 'Skały' },
-  { src: '/images/orange.png', correctAnswer: 'Pomarańcza' },
-  { src: '/images/scared.png', correctAnswer: 'Strach' },
-  { src: '/images/dog.png', correctAnswer: 'Pies' }
+  { src: '/images/triangle.png', correctAnswer: 'triangle' },
+  { src: '/images/apple.png', correctAnswer: 'apple' },
+  { src: '/images/disable.png', correctAnswer: 'person_with_disability' },
+  { src: '/images/joy.png', correctAnswer: 'joy' },
+  { src: '/images/sadness.png', correctAnswer: 'sadness' },
+  { src: '/images/sun.png', correctAnswer: 'sun' },
+  { src: '/images/rocks.png', correctAnswer: 'rocks' },
+  { src: '/images/orange.png', correctAnswer: 'orange' },
+  { src: '/images/scared.png', correctAnswer: 'fear' },
+  { src: '/images/dog.png', correctAnswer: 'dog' }
 ];
 
 const exposureTimes = [34, 50, 100, 150];
 
 const Results = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const [results, setResults] = useState([]);
@@ -50,7 +52,7 @@ const Results = () => {
     results.forEach(answer => {
       if (answer.exposureTime === time) {
         const image = images.find(img => img.src === answer.image);
-        if (image && answer.answer === image.correctAnswer) {
+        if (image && answer.answer === t(`experiment_options.${image.correctAnswer}`)) {
           uniqueAnswers.add(answer.image);
         }
       }
@@ -60,26 +62,26 @@ const Results = () => {
 
   return (
     <div className="results-container">
-      <h1>Wyniki</h1>
-      <p>Twój wynik w czasie ekspozycji:</p>
+      <h1>{t('results.title')}</h1>
+      <p>{t('results.exposure_time')}</p>
       <ul>
         {exposureTimes.map(time => (
-          <li key={time}>{time} ms: {getCorrectAnswersCount(time)} poprawnych odpowiedzi</li>
+          <li key={time}>{time} ms: {getCorrectAnswersCount(time)} {t('results.correct_answers')}</li>
         ))}
       </ul>
-      <p>Dziękujemy za udział w badaniu!</p>
-      <button onClick={handleHomeClick} className="home-button">Strona główna</button>
-      <h2>Podziel się swoją opinią na temat badania lub przekaż swoje uwagi</h2>
+      <p>{t('results.thanks')}</p>
+      <button onClick={handleHomeClick} className="home-button">{t('results.home_button')}</button>
+      <h2>{t('results.feedback_title')}</h2>
       <form onSubmit={handleFeedbackSubmit} className="feedback-form">
         <textarea
           value={feedback}
           onChange={handleFeedbackChange}
-          placeholder="Wpisz tutaj swoje uwagi..."
+          placeholder={t('results.feedback_placeholder')}
           rows="4"
           cols="50"
         />
         <br />
-        <button type="submit" className="submit-feedback-button">Wyślij</button>
+        <button type="submit" className="submit-feedback-button">{t('results.submit_feedback_button')}</button>
       </form>
     </div>
   );
