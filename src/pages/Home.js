@@ -109,7 +109,7 @@ function Home() {
           <h2>Informacje o badaniu</h2>
           <p>
             Nazywam się Krzysztof Szymała, jestem studentem kognitywistyki na Uniwersytecie Śląskim w Katowicach. 
-            Moje badanie dotyczy różnic w percepcji bodźców wzrokowych u osób medytujących i niemeditujących i jest częścią pracy magisterskiej,
+            Moje badanie dotyczy różnic w percepcji bodźców wzrokowych u osób medytujących i niemedytujących. Jest częścią pracy magisterskiej,
             której tytuł to "Wpływ technik medytacyjnych na wybrane procesy poznawcze człowieka".
             Udział w badaniu pomoże w zgłębianiu wpływu medytacji na nasze zdolności percepcyjne.
           </p>
