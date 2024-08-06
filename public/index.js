@@ -17,7 +17,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
     backend: {
-        loadPath: '/locales/{{lng}}/{{lng}}.json', // Upewnij się, że ta ścieżka jest poprawna
+        loadPath: '/locales/{{lng}}.json', // Upewnij się, że ta ścieżka jest poprawna
     },
     ns: ['translation'], // Dodaj tę linię
     defaultNS: 'translation', // Dodaj tę linię
