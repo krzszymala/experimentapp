@@ -11,6 +11,8 @@ const port = process.env.PORT || 5000;
 
 const participantRoutes = require('./routes/participants');
 
+app.use('/locales', express.static('locales'));
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/api/participants', participantRoutes);
