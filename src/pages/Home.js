@@ -136,12 +136,12 @@ function Home() {
         <button onClick={() => changeLanguage('en')} aria-label={t('change_to_english')}>
           <div className="flag-button"></div>
             <img src="/images/uk.png" alt="" />
-         <div className="flag-text">{t('English')}</div>
+         <div className="flag-text">{t('english')}</div>
         </button>
         <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
           <div className="flag-button">
             <img src="/images/pl.png" alt="" />
-            <div className="fag-text">{t('Polski')}</div>
+            <div className="fag-text">{t('polski')}</div>
           </div>
         </button>
       </div>

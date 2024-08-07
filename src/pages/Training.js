@@ -4,17 +4,17 @@ import { useTranslation } from 'react-i18next';
 import './Training.css';
 
 const images = [
-  { src: '/images/square.png', name: 'Square' },
-  { src: '/images/circle.png', name: 'Circle' },
-  { src: '/images/cat.png', name: 'Cat' },
-  { src: '/images/smile.png', name: 'Smile' },
+  { src: '/images/square.png', name: t('images.square') },
+  { src: '/images/circle.png', name: t('images.circle') },
+  { src: '/images/cat.png', name: t('images.cat') },
+  { src: '/images/smile.png', name: t('images.smile') },
 ];
 
 const randomWords = [
-  'House', 'Car', 'Phone', 'Apple', 'Computer', 
-  'Book', 'Pen', 'Watch', 'Dog', 'Clock',
-  'Bike', 'Door', 'Lamp', 'Table', 'Chair',
-  'TV', 'Key', 'Window', 'Shoes', 'Flower'
+  t('randomWords.house'), t('randomWords.car'), t('randomWords.phone'), t('randomWords.apple'), t('randomWords.computer'), 
+  t('randomWords.book'), t('randomWords.pen'), t('randomWords.watch'), t('randomWords.dog'), t('randomWords.clock'),
+  t('randomWords.bike'), t('randomWords.door'), t('randomWords.lamp'), t('randomWords.table'), t('randomWords.chair'),
+  t('randomWords.tv'), t('randomWords.key'), t('randomWords.window'), t('randomWords.shoes'), t('randomWords.flower')
 ];
 
 const displayTime = 300; // Time to display image in milliseconds (300 ms)
