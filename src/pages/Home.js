@@ -63,7 +63,7 @@ function Home() {
 
   const generateOptions = (count) => {
     return Array.from({ length: count }, (_, i) => (
-      <option key={i + 1} value={i + 1}>{i + 1}</option>
+      <option key={i + start} value={i + start}>{i + start}</option>
     ));
   };
 
@@ -75,7 +75,7 @@ function Home() {
           {t('age')}
           <select value={age} onChange={(e) => setAge(e.target.value)} required>
             <option value="">{t('select')}</option>
-            {generateOptions(100)}
+            {generateOptions(83,18)}
           </select>
         </label>
         <label>
