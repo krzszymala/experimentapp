@@ -92,7 +92,7 @@ const questionDelayTime = 1000; // Delay before showing question in milliseconds
   return (
     <div className="training-container">
       {!started ? (
-        <div className="instructions">
+        <div className="instructions-container">
           <h2>{t('training_instructions_title')}</h2>
           <p>
             {t('training_instructions_text')}
