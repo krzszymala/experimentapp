@@ -58,8 +58,7 @@ input[type="checkbox"] {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
-  margin-bottom: 2 rem;
-}
+  }
 
 .submit-button:hover {
   background-color: #e04a4f;
@@ -164,6 +163,7 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 2 rem;
 }
 
 .flag-container img {
