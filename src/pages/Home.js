@@ -84,7 +84,6 @@ function Home() {
             <option value="">{t('select')}</option>
             <option value="male">{t('male')}</option>
             <option value="female">{t('female')}</option>
-            <option value="other">{t('other')}</option>
           </select>
         </label>
         <label>
@@ -135,12 +134,15 @@ function Home() {
       )}
       <div className="flag-container">
         <button onClick={() => changeLanguage('en')} aria-label={t('change_to_english')}>
-          <img src="/images/uk.png" alt="" />
-          {t('english')}
+          <div className="flag-button"></div>
+            <img src="/images/uk.png" alt="" />
+         <div className="flag-text">{t('English')}</div>
         </button>
         <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
-          <img src="/images/pl.png" alt="" />
-          {t('polish')}
+          <div className="flag-button">
+            <img src="/images/pl.png" alt="" />
+            <div className="fag-text">{t('Polski')}</div>
+          </div>
         </button>
       </div>
     </div>
