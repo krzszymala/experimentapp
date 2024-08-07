@@ -58,6 +58,7 @@ input[type="checkbox"] {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
+  margin-bottom: 2 rem;
 }
 
 .submit-button:hover {
