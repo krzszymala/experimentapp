@@ -63,11 +63,11 @@ function Experiment() {
   }, [isPause, navigate, started, showQuestion, showInfo, currentImageIndex, currentRound]);
 
   const generateOptions = useCallback(() => {
-    const correctAnswer = images[currentImageIndex].correctAnswer;
-    const incorrectAnswers = images[currentImageIndex].options;
+    const correctAnswer = t(`experiment_options.${images[currentImageIndex].correctAnswer}`);
+    const incorrectAnswers = images[currentImageIndex].options.map(option => t(`experiment_options.${option}`));
     const allOptions = [...incorrectAnswers, correctAnswer].sort(() => 0.5 - Math.random());
-    setOptions([...allOptions, 'Nie wiem']);
-  }, [currentImageIndex]);
+    setOptions([...allOptions, t('i_dont_know')]);
+  }, [currentImageIndex, t]);
 
   useEffect(() => {
     if (showQuestion) {
@@ -110,15 +110,19 @@ function Experiment() {
   };
 
   const handleAnswerSubmit = () => {
-    console.log(`Answer submitted: ${answer}`);
+    const translatedCorrectAnswer = t(`experiment_options.${images[currentImageIndex].correctAnswer}`);
+    const isCorrect = answer === translatedCorrectAnswer;
+
     const answerData = {
       participantId,
       image: images[currentImageIndex].src,
       answer,
       exposureTime: exposureTimes[currentRound],
+      correct: isCorrect, // Dodanie informacji o poprawności odpowiedzi
       stage: 1,
       phase: 'experiment'
     };
+
     console.log("Answer data being saved: ", answerData);
 
     // Pobierz obecnie zapisane odpowiedzi
