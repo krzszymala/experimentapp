@@ -22,7 +22,7 @@
     "polski": "Polski",
     "training_start": "Start",
     "training_instructions_title": "Instructions",
-    "training_instructions_text": "You will see a series of images displayed on the screen. After each image, you will be asked a question about what was shown. If you are not sure about the answer, please do not guess – select 'I don't know'. Make sure to perform the experiment in a well-lit room. If it is nighttime, it is recommended to turn on the light to ensure good visibility conditions.",
+    "training_instructions_text": "You will see a series of images displayed on the screen. After each image, you will be asked a question about what was shown. Make sure to perform the experiment in a well-lit room. If it is nighttime, it is recommended to turn on the light to ensure good visibility conditions.",
     "images": {
       "square": "Square",
       "circle": "Circle",
