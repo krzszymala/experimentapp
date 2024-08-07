@@ -4,16 +4,16 @@ import { useTranslation } from 'react-i18next';
 import './Experiment.css';
 
 const images = [
-  { src: '/images/triangle.png', correctAnswer: 'Trójkąt', options: ['Góry', 'Samochód', 'Księżyc'] },
-  { src: '/images/apple.png', correctAnswer: 'Jabłko', options: ['Pomarańcza', 'Drzewo', 'Pies'] },
-  { src: '/images/disable.png', correctAnswer: 'Osoba z niepełnosprawnością', options: ['Samochód', 'Stół', 'Kierowca wyścigówki'] },
-  { src: '/images/joy.png', correctAnswer: 'Radość', options: ['Smutek', 'Płacz', 'Strach'] },
-  { src: '/images/sadness.png', correctAnswer: 'Smutek', options: ['Radość', 'Strach', 'Złość'] },
-  { src: '/images/sun.png', correctAnswer: 'Słońce', options: ['Pomarańcza', 'Jabłko', 'Kot'] },
-  { src: '/images/rocks.png', correctAnswer: 'Skały', options: ['Droga', 'Dom', 'Wieloryb'] },
-  { src: '/images/orange.png', correctAnswer: 'Pomarańcza', options: ['Słońce', 'Dom', 'Uśmiech'] },
-  { src: '/images/scared.png', correctAnswer: 'Strach', options: ['Radość', 'Kot', 'Smutek'] },
-  { src: '/images/dog.png', correctAnswer: 'Pies', options: ['Kot', 'Smutek', 'Sweter'] }
+  { src: '/images/triangle.png', correctAnswer: 'triangle', options: ['mountains', 'car', 'moon'] },
+  { src: '/images/apple.png', correctAnswer: 'apple', options: ['orange', 'tree', 'dog'] },
+  { src: '/images/disable.png', correctAnswer: 'person_with_disability', options: ['car', 'table', 'race_car_driver'] },
+  { src: '/images/joy.png', correctAnswer: 'joy', options: ['sadness', 'crying', 'fear'] },
+  { src: '/images/sadness.png', correctAnswer: 'sadness', options: ['joy', 'fear', 'anger'] },
+  { src: '/images/sun.png', correctAnswer: 'sun', options: ['orange', 'apple', 'cat'] },
+  { src: '/images/rocks.png', correctAnswer: 'rocks', options: ['road', 'house', 'whale'] },
+  { src: '/images/orange.png', correctAnswer: 'orange', options: ['sun', 'house', 'smile'] },
+  { src: '/images/scared.png', correctAnswer: 'fear', options: ['joy', 'cat', 'sadness'] },
+  { src: '/images/dog.png', correctAnswer: 'dog', options: ['cat', 'sadness', 'sweater'] }
 ];
 
 const exposureTimes = [34, 50, 100, 150];
