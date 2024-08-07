@@ -3,6 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Training.css';
 
+function Training() {
+  const { t } = useTranslation();
+  const location = useLocation();
+  const { participantId } = location.state || {};
+  console.log("Participant ID in Training: ", participantId);
+
 const images = [
   { src: '/images/square.png', name: t('images.square') },
   { src: '/images/circle.png', name: t('images.circle') },
@@ -21,12 +27,6 @@ const displayTime = 300; // Time to display image in milliseconds (300 ms)
 const initialPauseTime = 3000; // Initial pause before first image in milliseconds (3 seconds)
 const pauseTime = 3000; // Pause time in milliseconds (3 seconds)
 const questionDelayTime = 1000; // Delay before showing question in milliseconds (1 second)
-
-function Training() {
-  const { t } = useTranslation();
-  const location = useLocation();
-  const { participantId } = location.state || {};
-  console.log("Participant ID in Training: ", participantId);
 
   const [started, setStarted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
