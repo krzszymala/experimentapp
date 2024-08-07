@@ -61,7 +61,7 @@ function Home() {
   const closeInfo = () => setInfoVisible(false);
   const changeLanguage = (lng) => i18n.changeLanguage(lng);
 
-  const generateOptions = (count) => {
+  const generateOptions = (count, start = 1) => {
     return Array.from({ length: count }, (_, i) => (
       <option key={i + start} value={i + start}>{i + start}</option>
     ));
