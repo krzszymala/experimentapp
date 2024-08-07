@@ -22,7 +22,7 @@
     "polski": "Polski",
     "training_start": "Start",
     "training_instructions_title": "Instrukcje",
-    "training_instructions_text": "Jest to seria treningowa, podczas której masz możliwość zapoznania się z zasadą działania aplikacji i badani. Na ekranie pojawi się seria obrazów, których czas ekspozycji będzie wynosił 300 ms. Po każdym obrazie pojawi się pytanie o to, co pojawiło się na ekranie. Upewnij się, że wykonujesz eksperyment w odpowiednio oświetlonym pomieszczeniu. Jeśli jest to w godzinach nocnych, zaleca się zapalenie światła, aby zapewnić dobre warunki widoczności.",
+    "training_instructions_text": "Jest to seria treningowa, podczas której masz możliwość zapoznania się z zasadą działania aplikacji i badania. Na ekranie pojawi się seria obrazów, których czas ekspozycji będzie wynosił 300 ms. Po każdym obrazie pojawi się pytanie o to, co pojawiło się na ekranie. Upewnij się, że wykonujesz eksperyment w odpowiednio oświetlonym pomieszczeniu. Jeśli jest to w godzinach nocnych, zaleca się zapalenie światła, aby zapewnić dobre warunki widoczności.",
     "images": {
       "square": "Kwadrat",
       "circle": "Koło",
