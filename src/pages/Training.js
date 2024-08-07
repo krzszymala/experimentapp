@@ -68,54 +68,25 @@ function Training() {
     }, initialPauseTime);
   };
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+  const handleAnswerSubmit = () => {
+    console.log(`Answer submitted: ${answer}`);
+    setAnswer('');
+    setSelectedOption('');
+    setShowQuestion(false);
+    if (currentImageIndex + 1 === images.length) {
+      navigate('/experiment', { state: { participantId } }); // Przekazanie participantId do Experiment.js
+    } else {
+      setTimeout(() => {
+        setIsPause(false);
+        setCurrentImageIndex(prevIndex => prevIndex + 1);
+        console.log('Pause ended, showing next image');
+      }, pauseTime);
+    }
   };
 
-  const handleAnswerSubmit = async () => {
-    if (!selectedOption) {
-      return;
-    }
-
-    const data = {
-      participantId,
-      imageName: images[currentImageIndex].name,
-      answer: selectedOption,
-      isCorrect: selectedOption === images[currentImageIndex].name,
-    };
-
-    console.log('Submitting answer:', data);
-
-    try {
-      const response = await fetch('http://54.37.234.226:5000/api/answers/saveAnswer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const result = await response.json();
-      console.log('Answer saved:', result);
-
-      if (currentImageIndex < images.length - 1) {
-        setCurrentImageIndex(currentImageIndex + 1);
-        setIsPause(true);
-        setSelectedOption('');
-        setShowQuestion(false);
-        setTimeout(() => {
-          setIsPause(false);
-        }, pauseTime);
-      } else {
-        navigate('/summary');
-      }
-    } catch (error) {
-      console.error('Error saving answer:', error);
-    }
+  const handleOptionClick = (option) => {
+    setAnswer(option);
+    setSelectedOption(option);
   };
 
   return (
