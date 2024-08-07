@@ -160,46 +160,16 @@ input[type="checkbox"] {
   }
 }
 
-/* Stylizacje flag i przycisków flag */
 .flag-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px; /* Poprawienie odstępu */
 }
 
-.flag-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.flag-button img {
-  width: 40px; /* Ustaw pożądany rozmiar */
+.flag-container img {
+  width: 40px; /* Zmniejszenie rozmiaru flag */
   height: auto;
-  margin-bottom: 5px; /* Dodaj odstęp między obrazkiem a tekstem */
+  margin: 0 10px;
   cursor: pointer;
-}
-
-.flag-text {
-  margin-top: 5px;
-  text-align: center;
-}
-
-/* Stylizacje flag i przycisków flag dla urządzeń mobilnych */
-@media (max-width: 600px) {
-  .flag-container {
-    flex-direction: column; /* Ułóż flagi w kolumnie na małych ekranach */
-  }
-
-  .flag-button {
-    margin-bottom: 10px; /* Dodaj odstęp między przyciskami flag na małych ekranach */
-  }
-
-  .flag-container img {
-    width: 30px; /* Zmniejsz rozmiar obrazków na mniejszych ekranach */
-  }
-
-  .flag-container {
-    margin-bottom: 20px; /* Zapewnij dodatkowy odstęp na dole flag-container */
-  }
 }
