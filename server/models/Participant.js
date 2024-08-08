@@ -20,7 +20,14 @@ const participantSchema = new mongoose.Schema({
   meditationYears: {
     type: Number,
     required: false
+  },
+
+  meditationType: {
+    type: String,
+    required: false,
+    enum: ['Mindfulness', 'Zen', 'Medytacja Transcendentalna', 'Vipassana', 'Kundalini', 'Medytacja chrześcijańska', 'inna']
   }
+  
 });
 
 const Participant = mongoose.model('Participant', participantSchema);

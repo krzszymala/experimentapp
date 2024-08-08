@@ -29,6 +29,7 @@ function Home() {
       education,
       meditationExperience,
       meditationYears: meditationExperience ? meditationYears : null,
+      meditationType: meditationExperience ? meditationType : null,
     };
 
     console.log('Sending participant data:', participantData);
@@ -107,18 +108,38 @@ function Home() {
           />
         </label>
         {meditationExperience && (
-          <label>
-            {t('years_of_practice')}
-            <select 
-              value={meditationYears} 
-              onChange={(e) => setMeditationYears(e.target.value)} 
-              required
-            >
-              <option value="">{t('select')}</option>
-              {generateOptions(90)}
-            </select>
-          </label>
-        )}
+  <>
+    <label>
+      {t('years_of_practice')}
+      <select 
+        value={meditationYears} 
+        onChange={(e) => setMeditationYears(e.target.value)} 
+        required
+      >
+        <option value="">{t('select')}</option>
+        {generateOptions(90)}
+      </select>
+    </label>
+    <label>
+      {t('meditation_type')}
+      <select 
+        value={meditationType} 
+        onChange={(e) => setMeditationType(e.target.value)} 
+        required
+      >
+        <option value="">{t('select')}</option>
+        <option value="mindfulness">{t('Mindfulness')}</option>
+        <option value="zen">{t('Zen')}</option>
+        <option value="tm">{t('Transcendental Meditation')}</option>
+        <option value="vipassana">{t('Vipassana')}</option>
+        <option value="kundalini">{t('Kundalini')}</option>
+        <option value="christian_meditation">{t('Christian Meditation')}</option>
+        <option value="other">{t('Other')}</option>
+      </select>
+    </label>
+  </>
+  )}
+
         <button type="submit" className="submit-button" disabled={isSubmitting}>
           {isSubmitting ? t('submitting') : t('register')}
         </button>
