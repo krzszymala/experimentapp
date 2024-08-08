@@ -10,10 +10,11 @@ function Home() {
   const [education, setEducation] = useState('');
   const [meditationExperience, setMeditationExperience] = useState(false);
   const [meditationYears, setMeditationYears] = useState('');
+  const [meditationType, setMeditationType] = useState(''); // Dodano brakujące zmienne
   const [infoVisible, setInfoVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
-  const [showInfo, setShowInfo] = useState(false); // Dodano tę linię
+  const [showInfo, setShowInfo] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,7 +30,7 @@ function Home() {
       education,
       meditationExperience,
       meditationYears: meditationExperience ? meditationYears : null,
-      meditationType: meditationExperience ? meditationType : null,
+      meditationType: meditationExperience ? meditationType : null, // Użycie zmiennej poprawnie
     };
 
     console.log('Sending participant data:', participantData);
@@ -76,7 +77,7 @@ function Home() {
           {t('age')}
           <select value={age} onChange={(e) => setAge(e.target.value)} required>
             <option value="">{t('select')}</option>
-            {generateOptions(83,18)}
+            {generateOptions(83, 18)}
           </select>
         </label>
         <label>
@@ -108,38 +109,37 @@ function Home() {
           />
         </label>
         {meditationExperience && (
-  <>
-    <label>
-      {t('years_of_practice')}
-      <select 
-        value={meditationYears} 
-        onChange={(e) => setMeditationYears(e.target.value)} 
-        required
-      >
-        <option value="">{t('select')}</option>
-        {generateOptions(90)}
-      </select>
-    </label>
-    <label>
-      {t('meditation_type')}
-      <select 
-        value={meditationType} 
-        onChange={(e) => setMeditationType(e.target.value)} 
-        required
-      >
-        <option value="">{t('select')}</option>
-        <option value="mindfulness">{t('Mindfulness')}</option>
-        <option value="zen">{t('Zen')}</option>
-        <option value="tm">{t('Transcendental Meditation')}</option>
-        <option value="vipassana">{t('Vipassana')}</option>
-        <option value="kundalini">{t('Kundalini')}</option>
-        <option value="christian_meditation">{t('Christian Meditation')}</option>
-        <option value="other">{t('Other')}</option>
-      </select>
-    </label>
-  </>
-  )}
-
+          <>
+            <label>
+              {t('years_of_practice')}
+              <select 
+                value={meditationYears} 
+                onChange={(e) => setMeditationYears(e.target.value)} 
+                required
+              >
+                <option value="">{t('select')}</option>
+                {generateOptions(90)}
+              </select>
+            </label>
+            <label>
+              {t('meditation_type')}
+              <select 
+                value={meditationType} 
+                onChange={(e) => setMeditationType(e.target.value)} 
+                required
+              >
+                <option value="">{t('select')}</option>
+                <option value="mindfulness">{t('Mindfulness')}</option>
+                <option value="zen">{t('Zen')}</option>
+                <option value="tm">{t('Transcendental Meditation')}</option>
+                <option value="vipassana">{t('Vipassana')}</option>
+                <option value="kundalini">{t('Kundalini')}</option>
+                <option value="christian_meditation">{t('Christian Meditation')}</option>
+                <option value="other">{t('Other')}</option>
+              </select>
+            </label>
+          </>
+        )}
         <button type="submit" className="submit-button" disabled={isSubmitting}>
           {isSubmitting ? t('submitting') : t('register')}
         </button>
@@ -162,7 +162,7 @@ function Home() {
         <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
           <div className="flag-button">
             <img src="/images/pl.png" alt="" />
-            <div className="fag-text">{t('polski')}</div>
+            <div className="flag-text">{t('polski')}</div>
           </div>
         </button>
       </div>
