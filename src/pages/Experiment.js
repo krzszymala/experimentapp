@@ -76,6 +76,7 @@ function Experiment() {
   }, [showQuestion, generateOptions]);
 
   const handleStart = () => {
+    localStorage.removeItem('answers'); // Wyczyszczenie zapisanych odpowiedzi
     setStarted(true);
     console.log('Starting experiment...');
     setShowInfo(true);
@@ -124,7 +125,7 @@ function Experiment() {
       image: images[currentImageIndex].src,
       answer,
       exposureTime: exposureTimes[currentRound],
-      correct: isCorrect, // Dodanie informacji o poprawności odpowiedzi
+      correct: isCorrect,
       stage: 1,
       phase: 'experiment'
     };
@@ -136,12 +137,15 @@ function Experiment() {
   
     console.log('Checking for duplicates...');
     console.log('Saved answers:', savedAnswers);
-
+  
     // Sprawdź, czy odpowiedź już istnieje
-    const isDuplicate = savedAnswers.some(savedAnswer =>
-      savedAnswer.image === answerData.image &&
-      savedAnswer.exposureTime === answerData.exposureTime
-    );
+    const isDuplicate = savedAnswers.some(savedAnswer => {
+      console.log('Comparing saved answer:', savedAnswer);
+      console.log('With current answer data:', answerData);
+      return savedAnswer.image === answerData.image &&
+             savedAnswer.exposureTime === answerData.exposureTime &&
+             savedAnswer.participantId === answerData.participantId;
+    });
   
     if (isDuplicate) {
       console.log('Duplicate answer detected, not saving.');
