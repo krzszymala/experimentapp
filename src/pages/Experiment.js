@@ -113,6 +113,10 @@ function Experiment() {
     const translatedCorrectAnswer = t(`experiment_options.${images[currentImageIndex].correctAnswer}`);
     const isCorrect = answer === translatedCorrectAnswer;
 
+    console.log('Translated correct answer:', translatedCorrectAnswer);
+    console.log('User answer:', answer);
+    console.log('Is answer correct:', isCorrect);
+
     const answerData = {
       participantId,
       image: images[currentImageIndex].src,
