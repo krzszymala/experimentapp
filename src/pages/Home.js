@@ -10,7 +10,7 @@ function Home() {
   const [education, setEducation] = useState('');
   const [meditationExperience, setMeditationExperience] = useState(false);
   const [meditationYears, setMeditationYears] = useState('');
-  const [meditationType, setMeditationType] = useState(''); // Dodano brakujące zmienne
+  const [meditationType, setMeditationType] = useState('');
   const [infoVisible, setInfoVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -30,7 +30,7 @@ function Home() {
       education,
       meditationExperience,
       meditationYears: meditationExperience ? meditationYears : null,
-      meditationType: meditationExperience ? meditationType : null, // Użycie zmiennej poprawnie
+      meditationType: meditationExperience ? meditationType : null,
     };
 
     console.log('Sending participant data:', participantData);
@@ -45,6 +45,8 @@ function Home() {
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error response from server:', errorData);
         throw new Error(t('network_error'));
       }
 
@@ -129,13 +131,13 @@ function Home() {
                 required
               >
                 <option value="">{t('select')}</option>
-                <option value="mindfulness">{t('mindfulness')}</option>
-                <option value="zen">{t('zen')}</option>
-                <option value="tm">{t('tm')}</option>
-                <option value="vipassana">{t('vipassana')}</option>
-                <option value="kundalini">{t('kundalini')}</option>
-                <option value="christian_meditation">{t('christian_meditation')}</option>
-                <option value="other">{t('other')}</option>
+                <option value="mindfulness">{t('Mindfulness')}</option>
+                <option value="zen">{t('Zen')}</option>
+                <option value="tm">{t('Transcendental Meditation')}</option>
+                <option value="vipassana">{t('Vipassana')}</option>
+                <option value="kundalini">{t('Kundalini')}</option>
+                <option value="christian_meditation">{t('Christian Meditation')}</option>
+                <option value="other">{t('Other')}</option>
               </select>
             </label>
           </>
