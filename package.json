@@ -46,7 +46,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://54.37.234.226:5000",
+  "proxy": "https://54.37.234.226:5000",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "customize-cra": "^1.0.0",
