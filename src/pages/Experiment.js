@@ -90,7 +90,7 @@ function Experiment() {
 
   const saveResponse = async (answerData) => {
     try {
-      const response = await fetch('https://perceptionthresholdthesis.site:5000/api/participants/saveParticipant', {
+      const response = await fetch('https://perceptionthresholdthesis.site/api/participants/saveAnswer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
