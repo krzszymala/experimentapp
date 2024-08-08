@@ -90,6 +90,7 @@ function Experiment() {
 
   const saveResponse = async (answerData) => {
     try {
+      console.log('Sending answer data to server:', answerData);
       const response = await fetch('https://perceptionthresholdthesis.site/api/participants/saveAnswer', {
         method: 'POST',
         headers: {
@@ -99,11 +100,12 @@ function Experiment() {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${errorText}`);
       }
 
       const result = await response.json();
-      console.log('Answer saved:', result);
+      console.log('Answer saved successfully:', result);
     } catch (error) {
       console.error('Error saving answer data:', error);
     }
