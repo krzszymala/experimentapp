@@ -114,11 +114,11 @@ function Experiment() {
   const handleAnswerSubmit = () => {
     const translatedCorrectAnswer = t(`experiment_options.${images[currentImageIndex].correctAnswer}`);
     const isCorrect = answer === translatedCorrectAnswer;
-
+  
     console.log('Translated correct answer:', translatedCorrectAnswer);
     console.log('User answer:', answer);
     console.log('Is answer correct:', isCorrect);
-
+  
     const answerData = {
       participantId,
       image: images[currentImageIndex].src,
@@ -128,29 +128,29 @@ function Experiment() {
       stage: 1,
       phase: 'experiment'
     };
-
+  
     console.log("Answer data being saved: ", answerData);
-
+  
     // Pobierz obecnie zapisane odpowiedzi
     const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
-
+  
     // Sprawdź, czy odpowiedź już istnieje
     const isDuplicate = savedAnswers.some(savedAnswer =>
       savedAnswer.image === answerData.image &&
       savedAnswer.exposureTime === answerData.exposureTime
     );
-
-    if (!isDuplicate) {
+  
+    if (isDuplicate) {
+      console.log('Duplicate answer detected, not saving.');
+    } else {
       // Zapis odpowiedzi lokalnie
       localStorage.setItem('answers', JSON.stringify([...savedAnswers, answerData]));
       console.log('Current saved answers:', JSON.parse(localStorage.getItem('answers'))); // Logowanie obecnie zapisanych odpowiedzi
       
       // Zapis odpowiedzi na serwerze tylko jeśli nie jest duplikatem
       saveResponse(answerData);
-    } else {
-      console.log('Duplicate answer detected, not saving.');
     }
-
+  
     setAnswers([...answers, answerData]);
     setAnswer('');
     setSelectedOption('');
@@ -176,6 +176,7 @@ function Experiment() {
       }, pauseTime);
     }
   };
+  
 
   const handleOptionClick = (option) => {
     setAnswer(option);
