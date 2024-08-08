@@ -34,7 +34,7 @@ function Home() {
     console.log('Sending participant data:', participantData);
 
     try {
-      const response = await fetch('https://54.37.234.226:5000/api/participants/saveParticipant', {
+      const response = await fetch('https://perceptionthresholdthesis.site/api/participants/saveParticipant', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
