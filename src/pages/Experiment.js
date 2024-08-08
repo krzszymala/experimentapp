@@ -134,6 +134,9 @@ function Experiment() {
     // Pobierz obecnie zapisane odpowiedzi
     const savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
   
+    console.log('Checking for duplicates...');
+    console.log('Saved answers:', savedAnswers);
+
     // Sprawdź, czy odpowiedź już istnieje
     const isDuplicate = savedAnswers.some(savedAnswer =>
       savedAnswer.image === answerData.image &&
