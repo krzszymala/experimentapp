@@ -163,9 +163,9 @@ input[type="checkbox"] {
 }
 
 .flag-container {
-  position: fixed; /* Ensure it stays in a fixed position */
-  bottom: 2rem; /* Position it above the footer */
-  right: 2rem; /* Position it to the right side */
+  display: flex;
+  justify-content: center; /* Wycentrowanie przycisków poziomo */
+  margin-top: 1rem; /* Odstęp powyżej przycisków */
   z-index: 1000; /* Ensure it stays above other elements */
 }
 
