@@ -148,21 +148,24 @@ function Home() {
             <button type="submit" className="submit-button" disabled={isSubmitting}>
               {isSubmitting ? t('submitting') : t('register')}
             </button>
+            <button type="button" className="info-button" onClick={toggleInfo}>
+              {t('study_info')}
+            </button>
+            {infoVisible && (
+              <div className="info-popup visible">
+                <button className="close-button" onClick={closeInfo}>×</button>
+                <h2>{t('study_info')}</h2>
+                <p>{t('info_text')}</p>
+              </div>
+            )}
           </form>
           {error && <p className="error-message">{error}</p>}
-          <button className="info-button" onClick={toggleInfo}>{t('study_info')}</button>
-          {infoVisible && (
-            <div className="info-popup visible">
-              <button className="close-button" onClick={closeInfo}>×</button>
-              <h2>{t('study_info')}</h2>
-              <p>{t('info_text')}</p>
-            </div>
-          )}
           <div className="flag-container">
             <button onClick={() => changeLanguage('en')} aria-label={t('change_to_english')}>
-              <div className="flag-button"></div>
+              <div className="flag-button">
                 <img src="/images/uk.png" alt="" />
-              <div className="flag-text">{t('english')}</div>
+                <div className="flag-text">{t('english')}</div>
+              </div>
             </button>
             <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
               <div className="flag-button">

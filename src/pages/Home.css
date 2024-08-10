@@ -65,6 +65,21 @@ input[type="checkbox"] {
   background-color: #e04a4f;
 }
 
+.info-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem; /* Dodanie odstępu powyżej */
+}
+
+.info-button:hover {
+  background-color: #0056b3;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 1.5rem;
@@ -74,25 +89,11 @@ input[type="checkbox"] {
     padding: 0.5rem 1.5rem;
     font-size: 0.875rem;
   }
-}
 
-/* Dodajemy styl dla przycisku "Informacje o badaniu" */
-.info-button {
-  position: absolute;
-  bottom: 70px; /* Zmiana położenia przycisku */
-  right: 10px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 5;
-}
-
-.info-button:hover {
-  background-color: #0056b3;
+  .info-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
 }
 
 /* Styl dla dymka z informacjami o badaniu */
@@ -146,12 +147,12 @@ input[type="checkbox"] {
 /* Media query dla mniejszych ekranów */
 @media (max-width: 768px) {
   .info-button {
-    bottom: 70px; /* Przycisk pozostaje nad stopką */
+    bottom: 10px; /* Przycisk pozostaje nad stopką */
     right: 10px;
   }
 
   .info-popup {
-    bottom: 70px; /* Dymek pozostaje nad stopką */
+    bottom: 50px; /* Dymek pozostaje nad przyciskiem */
   }
 
   .submit-button {
