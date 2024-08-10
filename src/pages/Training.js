@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Training.css';
+import Footer from '../Footer';
 
 function Training() {
   const { t } = useTranslation();
@@ -142,6 +143,7 @@ const questionDelayTime = 1000; // Delay before showing question in milliseconds
           )}
         </>
       )}
+      <Footer />
     </div>
   );
 }

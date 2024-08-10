@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Home.css';
+import Footer from '../Footer';
 
 function Home() {
   const { t, i18n } = useTranslation();
@@ -168,6 +169,7 @@ function Home() {
           </div>
         </button>
       </div>
+      <Footer />
     </div>
   );
 }

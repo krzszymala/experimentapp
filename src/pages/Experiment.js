@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Experiment.css';
+import Footer from '../Footer';
 
 const images = [
   { src: '/images/triangle.png', correctAnswer: 'triangle', options: ['mountains', 'car', 'moon'] },
@@ -248,6 +249,7 @@ function Experiment() {
           )}
         </>
       )}
+      <Footer />
     </div>
   );
 }

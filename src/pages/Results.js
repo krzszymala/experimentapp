@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Results.css';
+import Footer from '../Footer';
 
 const images = [
   { src: '/images/triangle.png', correctAnswer: 'triangle' },
@@ -83,6 +84,7 @@ const Results = () => {
         <br />
         <button type="submit" className="submit-feedback-button">{t('results.submit_feedback_button')}</button>
       </form>
+      <Footer />
     </div>
   );
 };
