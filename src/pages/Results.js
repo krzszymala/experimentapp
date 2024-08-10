@@ -84,6 +84,11 @@ const Results = () => {
         <br />
         <button type="submit" className="submit-feedback-button">{t('results.submit_feedback_button')}</button>
       </form>
+      <div className="flag-container">
+        {/* Dodaj odpowiednie elementy flagi tutaj */}
+        <button>English</button>
+        <button>Polski</button>
+      </div>
       <Footer />
     </div>
   );
