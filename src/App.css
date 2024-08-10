@@ -10,7 +10,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 80%; /* Ustawienie określonej szerokości kontenera */
+  width: 90%; /* Ustawienie określonej szerokości kontenera */
   max-width: 1200px;
   margin: auto;
   flex: 1;
