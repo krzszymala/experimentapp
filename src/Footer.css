@@ -4,8 +4,11 @@
     font-size: 0.8rem;
     width: 100%;
     margin: 1rem 0; /* Dodanie marginesu dla przestrzeni między stopką a treścią */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-
 .footer p {
     margin: 0;
 }
