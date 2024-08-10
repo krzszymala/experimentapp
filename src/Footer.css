@@ -1,8 +1,13 @@
 .footer {
-    position: fixed;
+    position: relative; /* Ustawienie relative, aby nie zasłaniała innych elementów */
     bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 1rem 0;
+    padding: 0.5rem 0; /* Zmniejszenie paddingu, aby stopka była mniejsza */
     background-color: #f1f1f1;
+    font-size: 0.8rem; /* Zmniejszenie rozmiaru czcionki */
+}
+
+.footer p {
+    margin: 0; /* Usunięcie marginesów, aby tekst był bardziej wyśrodkowany */
 }
