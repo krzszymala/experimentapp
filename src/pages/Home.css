@@ -163,10 +163,10 @@ input[type="checkbox"] {
 }
 
 .flag-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px; /* Zmniejszony margines */
-  margin-bottom: 20px; /* Zmniejszony margines */
+  position: fixed; /* Ensure it stays in a fixed position */
+  bottom: 2rem; /* Position it above the footer */
+  right: 2rem; /* Position it to the right side */
+  z-index: 1000; /* Ensure it stays above other elements */
 }
 
 .flag-container img {
