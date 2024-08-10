@@ -73,101 +73,105 @@ function Home() {
   };
 
   return (
-    <div className="registration-container" style={{ position: 'relative' }}>
-      <h1>{t('registration')}</h1>
-      <form onSubmit={handleSubmit} className="registration-form">
-        <label>
-          {t('age')}
-          <select value={age} onChange={(e) => setAge(e.target.value)} required>
-            <option value="">{t('select')}</option>
-            {generateOptions(83, 18)}
-          </select>
-        </label>
-        <label>
-          {t('gender')}
-          <select value={gender} onChange={(e) => setGender(e.target.value)} required>
-            <option value="">{t('select')}</option>
-            <option value="male">{t('male')}</option>
-            <option value="female">{t('female')}</option>
-          </select>
-        </label>
-        <label>
-          {t('education')}
-          <select value={education} onChange={(e) => setEducation(e.target.value)} required>
-            <option value="">{t('select')}</option>
-            <option value="none">{t('none')}</option>
-            <option value="primary">{t('primary')}</option>
-            <option value="middle">{t('middle')}</option>
-            <option value="vocational">{t('vocational')}</option>
-            <option value="secondary">{t('secondary')}</option>
-            <option value="higher">{t('higher')}</option>
-          </select>
-        </label>
-        <label>
-          {t('meditation_experience')}
-          <input 
-            type="checkbox" 
-            checked={meditationExperience} 
-            onChange={(e) => setMeditationExperience(e.target.checked)} 
-          />
-        </label>
-        {meditationExperience && (
-          <>
+    <div className="App">
+      <div className="content">
+        <div className="registration-container" style={{ position: 'relative' }}>
+          <h1>{t('registration')}</h1>
+          <form onSubmit={handleSubmit} className="registration-form">
             <label>
-              {t('years_of_practice')}
-              <select 
-                value={meditationYears} 
-                onChange={(e) => setMeditationYears(e.target.value)} 
-                required
-              >
+              {t('age')}
+              <select value={age} onChange={(e) => setAge(e.target.value)} required>
                 <option value="">{t('select')}</option>
-                {generateOptions(90)}
+                {generateOptions(83, 18)}
               </select>
             </label>
             <label>
-              {t('meditation_type')}
-              <select 
-                value={meditationType} 
-                onChange={(e) => setMeditationType(e.target.value)} 
-                required
-              >
+              {t('gender')}
+              <select value={gender} onChange={(e) => setGender(e.target.value)} required>
                 <option value="">{t('select')}</option>
-                <option value="mindfulness">{t('mindfulness')}</option>
-                <option value="zen">{t('zen')}</option>
-                <option value="tm">{t('tm')}</option>
-                <option value="vipassana">{t('vipassana')}</option>
-                <option value="kundalini">{t('kundalini')}</option>
-                <option value="christian_meditation">{t('christian_meditation')}</option>
-                <option value="other">{t('other')}</option>
+                <option value="male">{t('male')}</option>
+                <option value="female">{t('female')}</option>
               </select>
             </label>
-          </>
-        )}
-        <button type="submit" className="submit-button" disabled={isSubmitting}>
-          {isSubmitting ? t('submitting') : t('register')}
-        </button>
-      </form>
-      {error && <p className="error-message">{error}</p>}
-      <button className="info-button" onClick={toggleInfo}>{t('study_info')}</button>
-      {infoVisible && (
-        <div className="info-popup visible">
-          <button className="close-button" onClick={closeInfo}>×</button>
-          <h2>{t('study_info')}</h2>
-          <p>{t('info_text')}</p>
-        </div>
-      )}
-      <div className="flag-container">
-        <button onClick={() => changeLanguage('en')} aria-label={t('change_to_english')}>
-          <div className="flag-button"></div>
-            <img src="/images/uk.png" alt="" />
-         <div className="flag-text">{t('english')}</div>
-        </button>
-        <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
-          <div className="flag-button">
-            <img src="/images/pl.png" alt="" />
-            <div className="flag-text">{t('polski')}</div>
+            <label>
+              {t('education')}
+              <select value={education} onChange={(e) => setEducation(e.target.value)} required>
+                <option value="">{t('select')}</option>
+                <option value="none">{t('none')}</option>
+                <option value="primary">{t('primary')}</option>
+                <option value="middle">{t('middle')}</option>
+                <option value="vocational">{t('vocational')}</option>
+                <option value="secondary">{t('secondary')}</option>
+                <option value="higher">{t('higher')}</option>
+              </select>
+            </label>
+            <label>
+              {t('meditation_experience')}
+              <input 
+                type="checkbox" 
+                checked={meditationExperience} 
+                onChange={(e) => setMeditationExperience(e.target.checked)} 
+              />
+            </label>
+            {meditationExperience && (
+              <>
+                <label>
+                  {t('years_of_practice')}
+                  <select 
+                    value={meditationYears} 
+                    onChange={(e) => setMeditationYears(e.target.value)} 
+                    required
+                  >
+                    <option value="">{t('select')}</option>
+                    {generateOptions(90)}
+                  </select>
+                </label>
+                <label>
+                  {t('meditation_type')}
+                  <select 
+                    value={meditationType} 
+                    onChange={(e) => setMeditationType(e.target.value)} 
+                    required
+                  >
+                    <option value="">{t('select')}</option>
+                    <option value="mindfulness">{t('mindfulness')}</option>
+                    <option value="zen">{t('zen')}</option>
+                    <option value="tm">{t('tm')}</option>
+                    <option value="vipassana">{t('vipassana')}</option>
+                    <option value="kundalini">{t('kundalini')}</option>
+                    <option value="christian_meditation">{t('christian_meditation')}</option>
+                    <option value="other">{t('other')}</option>
+                  </select>
+                </label>
+              </>
+            )}
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
+              {isSubmitting ? t('submitting') : t('register')}
+            </button>
+          </form>
+          {error && <p className="error-message">{error}</p>}
+          <button className="info-button" onClick={toggleInfo}>{t('study_info')}</button>
+          {infoVisible && (
+            <div className="info-popup visible">
+              <button className="close-button" onClick={closeInfo}>×</button>
+              <h2>{t('study_info')}</h2>
+              <p>{t('info_text')}</p>
+            </div>
+          )}
+          <div className="flag-container">
+            <button onClick={() => changeLanguage('en')} aria-label={t('change_to_english')}>
+              <div className="flag-button"></div>
+                <img src="/images/uk.png" alt="" />
+              <div className="flag-text">{t('english')}</div>
+            </button>
+            <button onClick={() => changeLanguage('pl')} aria-label={t('change_to_polish')}>
+              <div className="flag-button">
+                <img src="/images/pl.png" alt="" />
+                <div className="flag-text">{t('polski')}</div>
+              </div>
+            </button>
           </div>
-        </button>
+        </div>
       </div>
       <Footer />
     </div>

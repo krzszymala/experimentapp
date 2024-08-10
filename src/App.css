@@ -20,6 +20,7 @@ html, body, #root {
   flex: 1; /* Wypełnia pozostałą przestrzeń */
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Wyśrodkowanie zawartości w pionie */
 }
 
 .App-header {
