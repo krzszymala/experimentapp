@@ -1,5 +1,6 @@
 .registration-container {
-  max-width: 800px;
+  max-width: 1000px;
+  width: 100%; /* Zapewnienie pełnej szerokości do max-width */
   margin: 0 auto;
   padding: 2rem;
   background-color: #f9f9f9;
