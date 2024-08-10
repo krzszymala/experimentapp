@@ -1,177 +1,73 @@
 /* Home.css */
 .registration-container {
-  max-width: 1000px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  max-width: 100%;
+  padding: 1rem;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 h1 {
-  margin: 0.5rem 0;
-  font-size: 2rem;
-  color: #333;
-}
-
-.registration-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 1.5rem;
 }
 
 .form-row {
-  width: 100%;
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 label {
-  display: flex;
-  flex-direction: column;
-  font-size: 1rem;
-  color: #555;
+  font-size: 0.875rem;
 }
 
 input,
 select {
   padding: 0.5rem;
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-input[type="checkbox"] {
-  width: auto;
-  margin: 0.5rem 0;
+  font-size: 0.875rem;
 }
 
 .submit-button {
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #ff5a5f;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.submit-button:hover {
-  background-color: #e04a4f;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  margin-bottom: 50px;
 }
 
 .info-button {
   padding: 0.5rem 1rem;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 1rem;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
 }
 
-.info-button:hover {
-  background-color: #0056b3;
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .submit-button {
-    padding: 0.5rem 1.5rem;
-    font-size: 0.875rem;
-  }
-
-  .info-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-}
-
-/* Styl dla dymka z informacjami o badaniu */
 .info-popup {
-  display: none; /* Domyślnie ukrywamy dymek */
-  position: absolute;
-  bottom: 70px; /* Zmiana położenia dymka */
+  bottom: 50px;
   right: 10px;
   width: 90%;
   max-width: 300px;
-  padding: 1rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  z-index: 10;
-}
-
-.info-popup.visible {
-  display: block; /* Pokazujemy dymek, gdy jest aktywny */
+  padding: 0.75rem;
 }
 
 .info-popup h2 {
-  margin-top: 0;
-  font-size: 1.25rem;
-  color: #333;
+  font-size: 1rem;
 }
 
 .info-popup p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 0;
+  font-size: 0.875rem;
 }
 
-/* Styl dla krzyżyka zamykającego dymek */
 .close-button {
-  position: absolute;
   top: 5px;
   right: 5px;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color: #ff0000;
-}
-
-/* Media query dla mniejszych ekranów */
-@media (max-width: 768px) {
-  .info-button {
-    bottom: 10px; /* Przycisk pozostaje nad stopką */
-    right: 10px;
-  }
-
-  .info-popup {
-    bottom: 50px; /* Dymek pozostaje nad przyciskiem */
-  }
-
-  .submit-button {
-    margin-bottom: 50px; /* Dodajemy odstęp poniżej przycisku Zarejestruj */
-    padding: 0.5rem 1.5rem;
-    font-size: 0.875rem;
-  }
+  font-size: 0.875rem;
 }
 
 .flag-container {
-  display: flex;
-  justify-content: center; /* Wycentrowanie przycisków poziomo */
-  margin-top: 1rem; /* Odstęp powyżej przycisków */
-  z-index: 1000; /* Ensure it stays above other elements */
+  margin-top: 0.5rem;
 }
 
 .flag-container img {
-  width: 30px; /* Zmniejszony rozmiar flag */
-  height: auto;
-  margin: 0 8px; /* Zmniejszony margines */
-  cursor: pointer;
+  width: 24px;
+  margin: 0 6px;
 }
