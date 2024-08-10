@@ -2,7 +2,7 @@
   max-width: 1000px;
   width: 100%; /* Zapewnienie pełnej szerokości do max-width */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem; /* Usunięcie górnego paddingu */
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -11,8 +11,8 @@
 }
 
 h1 {
-  margin: 0 0 1rem 0;
-  font-size: 1.75rem;
+  margin: 1rem 0 1rem 0; /* Zmniejszony margines od góry */
+  font-size: 2rem;
   color: #333;
 }
 
@@ -79,7 +79,7 @@ input[type="checkbox"] {
 /* Dodajemy styl dla przycisku "Informacje o badaniu" */
 .info-button {
   position: absolute;
-  bottom: 10px;
+  bottom: 70px; /* Zmiana położenia przycisku */
   right: 10px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -99,7 +99,7 @@ input[type="checkbox"] {
 .info-popup {
   display: none; /* Domyślnie ukrywamy dymek */
   position: absolute;
-  bottom: 50px;
+  bottom: 70px; /* Zmiana położenia dymka */
   right: 10px;
   width: 90%;
   max-width: 300px;
@@ -146,12 +146,12 @@ input[type="checkbox"] {
 /* Media query dla mniejszych ekranów */
 @media (max-width: 768px) {
   .info-button {
-    bottom: 10px; /* Przycisk pozostaje na dole */
+    bottom: 70px; /* Przycisk pozostaje nad stopką */
     right: 10px;
   }
 
   .info-popup {
-    bottom: 50px; /* Dymek pozostaje nad przyciskiem */
+    bottom: 70px; /* Dymek pozostaje nad stopką */
   }
 
   .submit-button {
@@ -164,13 +164,13 @@ input[type="checkbox"] {
 .flag-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px; /* Poprawienie odstępu */
+  margin-top: 20px; /* Zmniejszony margines */
+  margin-bottom: 20px; /* Zmniejszony margines */
 }
 
 .flag-container img {
-  width: 40px; /* Zmniejszenie rozmiaru flag */
+  width: 30px; /* Zmniejszony rozmiar flag */
   height: auto;
-  margin: 0 10px;
+  margin: 0 8px; /* Zmniejszony margines */
   cursor: pointer;
 }
