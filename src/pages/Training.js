@@ -10,24 +10,24 @@ function Training() {
   const { participantId } = location.state || {};
   console.log("Participant ID in Training: ", participantId);
 
-const images = [
-  { src: '/images/square.png', name: t('images.square') },
-  { src: '/images/circle.png', name: t('images.circle') },
-  { src: '/images/cat.png', name: t('images.cat') },
-  { src: '/images/smile.png', name: t('images.smile') },
-];
+  const images = [
+    { src: '/images/square.png', name: t('images.square') },
+    { src: '/images/circle.png', name: t('images.circle') },
+    { src: '/images/cat.png', name: t('images.cat') },
+    { src: '/images/smile.png', name: t('images.smile') },
+  ];
 
-const randomWords = [
-  t('randomWords.house'), t('randomWords.car'), t('randomWords.phone'), t('randomWords.apple'), t('randomWords.computer'), 
-  t('randomWords.book'), t('randomWords.pen'), t('randomWords.watch'), t('randomWords.dog'), t('randomWords.clock'),
-  t('randomWords.bike'), t('randomWords.door'), t('randomWords.lamp'), t('randomWords.table'), t('randomWords.chair'),
-  t('randomWords.tv'), t('randomWords.key'), t('randomWords.window'), t('randomWords.shoes'), t('randomWords.flower')
-];
+  const randomWords = [
+    t('randomWords.house'), t('randomWords.car'), t('randomWords.phone'), t('randomWords.apple'), t('randomWords.computer'), 
+    t('randomWords.book'), t('randomWords.pen'), t('randomWords.watch'), t('randomWords.dog'), t('randomWords.clock'),
+    t('randomWords.bike'), t('randomWords.door'), t('randomWords.lamp'), t('randomWords.table'), t('randomWords.chair'),
+    t('randomWords.tv'), t('randomWords.key'), t('randomWords.window'), t('randomWords.shoes'), t('randomWords.flower')
+  ];
 
-const displayTime = 300; // Time to display image in milliseconds (300 ms)
-const initialPauseTime = 3000; // Initial pause before first image in milliseconds (3 seconds)
-const pauseTime = 3000; // Pause time in milliseconds (3 seconds)
-const questionDelayTime = 1000; // Delay before showing question in milliseconds (1 second)
+  const displayTime = 300; // Time to display image in milliseconds (300 ms)
+  const initialPauseTime = 3000; // Initial pause before first image in milliseconds (3 seconds)
+  const pauseTime = 3000; // Pause time in milliseconds (3 seconds)
+  const questionDelayTime = 1000; // Delay before showing question in milliseconds (1 second)
 
   const [started, setStarted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -91,58 +91,62 @@ const questionDelayTime = 1000; // Delay before showing question in milliseconds
   };
 
   return (
-    <div className="training-container">
-      {!started ? (
-        <div className="instructions-container">
-          <h2>{t('training_instructions_title')}</h2>
-          <p>
-            {t('training_instructions_text')}
-          </p>
-          <button onClick={handleStart} className="start-button">
-            {t('training_start')}
-          </button>
-        </div>
-      ) : (
-        <>
-          {!showQuestion && (
-            <div className="image-container">
-              {images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image.src}
-                  alt={image.name}
-                  className="image"
-                  style={{
-                    display: index === currentImageIndex && !isPause && !showQuestion ? 'block' : 'none'
-                  }}
-                />
-              ))}
+    <div className="App">
+      <div className="content">
+        <div className="training-container">
+          {!started ? (
+            <div className="instructions-container">
+              <h2>{t('training_instructions_title')}</h2>
+              <p>
+                {t('training_instructions_text')}
+              </p>
+              <button onClick={handleStart} className="start-button">
+                {t('training_start')}
+              </button>
             </div>
-          )}
-          {showQuestion && (
-            <div className="question-container">
-              <h2>{t('training_question')}</h2>
-              <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
-                <ul className="options-list">
-                  {options.map((option, index) => (
-                    <li key={index}>
-                      <button
-                        type="button"
-                        className={option === selectedOption ? 'selected' : ''}
-                        onClick={() => handleOptionClick(option)}
-                      >
-                        {option}
-                      </button>
-                    </li>
+          ) : (
+            <>
+              {!showQuestion && (
+                <div className="image-container">
+                  {images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image.src}
+                      alt={image.name}
+                      className="image"
+                      style={{
+                        display: index === currentImageIndex && !isPause && !showQuestion ? 'block' : 'none'
+                      }}
+                    />
                   ))}
-                </ul>
-                <br />
-                <button type="submit" className="submit-button">{t('training_submit_answer')}</button>
-              </form>
-            </div>
+                </div>
+              )}
+              {showQuestion && (
+                <div className="question-container">
+                  <h2>{t('training_question')}</h2>
+                  <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
+                    <ul className="options-list">
+                      {options.map((option, index) => (
+                        <li key={index}>
+                          <button
+                            type="button"
+                            className={option === selectedOption ? 'selected' : ''}
+                            onClick={() => handleOptionClick(option)}
+                          >
+                            {option}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <br />
+                    <button type="submit" className="submit-button">{t('training_submit_answer')}</button>
+                  </form>
+                </div>
+              )}
+            </>
           )}
-        </>
-      )}
+        </div>
+      </div>
       <Footer />
     </div>
   );
