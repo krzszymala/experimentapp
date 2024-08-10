@@ -192,63 +192,67 @@ function Experiment() {
   };
 
   return (
-    <div className="experiment-container">
-      {!started ? (
-        <div className="registration-container">
-          <h1>{t('experiment_instructions_title')}</h1>
-          <p className="study-description">
-            {t('experiment_instructions_text')}
-          </p>
-          <button onClick={handleStart} className="start-button">
-            {t('experiment_start')}
-          </button>
-        </div>
-      ) : (
-        <>
-          {showInfo && (
-            <div className="info-container">
-              <h2>{t('experiment_exposure_time')}: {exposureTimes[currentRound]} ms</h2>
+    <div className="App">
+      <div className="content">
+        <div className="experiment-container">
+          {!started ? (
+            <div className="registration-container">
+              <h1>{t('experiment_instructions_title')}</h1>
+              <p className="study-description">
+                {t('experiment_instructions_text')}
+              </p>
+              <button onClick={handleStart} className="start-button">
+                {t('experiment_start')}
+              </button>
             </div>
-          )}
-          {!showInfo && !showQuestion && (
-            <div className="image-container">
-              {images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image.src}
-                  alt={image.correctAnswer}
-                  className="image"
-                  style={{
-                    display: index === currentImageIndex && !isPause && !showQuestion ? 'block' : 'none'
-                  }}
-                />
-              ))}
-            </div>
-          )}
-          {showQuestion && (
-            <div className="question-container">
-              <h2>{t('experiment_question')}</h2>
-              <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
-                <ul className="options-list">
-                  {options.map((option, index) => (
-                    <li key={index}>
-                      <button
-                        type="button"
-                        className={option === selectedOption ? 'selected' : ''}
-                        onClick={() => handleOptionClick(option)}
-                      >
-                        {option}
-                      </button>
-                    </li>
+          ) : (
+            <>
+              {showInfo && (
+                <div className="info-container">
+                  <h2>{t('experiment_exposure_time')}: {exposureTimes[currentRound]} ms</h2>
+                </div>
+              )}
+              {!showInfo && !showQuestion && (
+                <div className="image-container">
+                  {images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image.src}
+                      alt={image.correctAnswer}
+                      className="image"
+                      style={{
+                        display: index === currentImageIndex && !isPause && !showQuestion ? 'block' : 'none'
+                      }}
+                    />
                   ))}
-                </ul>
-                <br />
-                <button type="submit" className="submit-button">{t('experiment_submit_answer')}</button>
-              </form>
-            </div>
+                </div>
+              )}
+              {showQuestion && (
+                <div className="question-container">
+                  <h2>{t('experiment_question')}</h2>
+                  <form onSubmit={e => { e.preventDefault(); handleAnswerSubmit(); }}>
+                    <ul className="options-list">
+                      {options.map((option, index) => (
+                        <li key={index}>
+                          <button
+                            type="button"
+                            className={option === selectedOption ? 'selected' : ''}
+                            onClick={() => handleOptionClick(option)}
+                          >
+                            {option}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                    <br />
+                    <button type="submit" className="submit-button">{t('experiment_submit_answer')}</button>
+                  </form>
+                </div>
+              )}
+            </>
           )}
-        </>
-      )}
+        </div>
+      </div>
       <Footer />
     </div>
   );
