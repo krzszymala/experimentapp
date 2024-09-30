@@ -24,7 +24,7 @@ function Training() {
     t('randomWords.tv'), t('randomWords.key'), t('randomWords.window'), t('randomWords.shoes'), t('randomWords.flower')
   ];
 
-  const displayTime = 300; // Time to display image in milliseconds (300 ms)
+  const displayTime = 17; // Time to display image in milliseconds (300 ms)
   const initialPauseTime = 3000; // Initial pause before first image in milliseconds (3 seconds)
   const pauseTime = 3000; // Pause time in milliseconds (3 seconds)
   const questionDelayTime = 1000; // Delay before showing question in milliseconds (1 second)
