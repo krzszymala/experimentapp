@@ -110,11 +110,12 @@
       "none": "Nie było żadnych osób",
       "one": "Jedna osoba",
       "three": "Trzy osoby",
-      "dusgusted": "Zniesmaczenie",
+      "disgusted": "Zniesmaczenie",
       "angry": "Złość",
       "smiling": "Uśmiech",
       "surprised": "Zaskoczenie",
-      "confused": "Zmieszanie"
+      "confused": "Zmieszanie",
+      "Sad": "Smutek"
 
     },
     "results": {

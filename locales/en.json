@@ -94,6 +94,7 @@
       "whale": "Whale",
       "smile": "Smile",
       "sweater": "Sweater",
+      "square": "Square",
       "bicycle": "Bicycle",
       "cow": "Cow",
       "horse": "Horse",
@@ -111,11 +112,12 @@
       "none": "There were no people",
       "one": "One person",
       "three": "Three people",
-      "dusgusted": "Disgusted person",
+      "disgusted": "Disgusted person",
       "angry": "Angry person",
       "smiling": "Joyful person",
       "surprised": "Surprised person",
-      "confused": "Confused person"
+      "confused": "Confused person",
+      "sad": "Sad person"
     
     },
     "results": {
