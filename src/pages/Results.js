@@ -5,19 +5,19 @@ import './Results.css';
 import Footer from '../Footer';
 
 const images = [
-  { src: '/images/triangle.png', correctAnswer: 'triangle' },
-  { src: '/images/apple.png', correctAnswer: 'apple' },
-  { src: '/images/disable.png', correctAnswer: 'person_with_disability' },
-  { src: '/images/joy.png', correctAnswer: 'joy' },
-  { src: '/images/sadness.png', correctAnswer: 'sadness' },
-  { src: '/images/sun.png', correctAnswer: 'sun' },
-  { src: '/images/rocks.png', correctAnswer: 'rocks' },
-  { src: '/images/orange.png', correctAnswer: 'orange' },
-  { src: '/images/scared.png', correctAnswer: 'fear' },
-  { src: '/images/dog.png', correctAnswer: 'dog' }
+  { src: '/images/car.png', correctAnswer: 'car' },
+  { src: '/images/dog2.png', correctAnswer: 'dog' },
+  { src: '/images/cyclists.png', correctAnswer: 'cyclists' },
+  { src: '/images/giraffe.png', correctAnswer: 'giraffe' },
+  { src: '/images/buggy.png', correctAnswer: 'buggy' },
+  { src: '/images/workers.png', correctAnswer: 'two' },
+  { src: '/images/angry.png', correctAnswer: 'angry' },
+  { src: '/images/disgusted.png', correctAnswer: 'disgusted' },
+  { src: '/images/confusion.png', correctAnswer: 'confused' },
+  { src: '/images/sad.png', correctAnswer: 'sad' }
 ];
 
-const exposureTimes = [34, 50, 100, 150];
+const exposureTimes = [17, 34, 50, 100];
 
 const Results = () => {
   const { t } = useTranslation();

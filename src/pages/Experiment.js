@@ -5,19 +5,19 @@ import './Experiment.css';
 import Footer from '../Footer';
 
 const images = [
-  { src: '/images/triangle.png', correctAnswer: 'triangle', options: ['mountains', 'car', 'moon'] },
-  { src: '/images/apple.png', correctAnswer: 'apple', options: ['orange', 'tree', 'dog'] },
-  { src: '/images/disable.png', correctAnswer: 'person_with_disability', options: ['car', 'table', 'race_car_driver'] },
-  { src: '/images/joy.png', correctAnswer: 'joy', options: ['sadness', 'crying', 'fear'] },
-  { src: '/images/sadness.png', correctAnswer: 'sadness', options: ['joy', 'fear', 'anger'] },
-  { src: '/images/sun.png', correctAnswer: 'sun', options: ['orange', 'apple', 'cat'] },
-  { src: '/images/rocks.png', correctAnswer: 'rocks', options: ['road', 'house', 'whale'] },
-  { src: '/images/orange.png', correctAnswer: 'orange', options: ['sun', 'house', 'smile'] },
-  { src: '/images/scared.png', correctAnswer: 'fear', options: ['joy', 'cat', 'sadness'] },
-  { src: '/images/dog.png', correctAnswer: 'dog', options: ['cat', 'sadness', 'sweater'] }
+  { src: '/images/car.png', correctAnswer: 'car', options: ['square', 'triangle', 'bicycle'] },
+  { src: '/images/dog2.png', correctAnswer: 'dog', options: ['cat', 'cow', 'horse'] },
+  { src: '/images/cyclists.png', correctAnswer: 'cyclists', options: ['car', 'horses', 'walking_people'] },
+  { src: '/images/giraffe.png', correctAnswer: 'giraffe', options: ['snake', 'ostrich', 'bench'] },
+  { src: '/images/buggy.png', correctAnswer: 'buggy', options: ['wheelchair', 'bicycle', 'scooter'] },
+  { src: '/images/workers.png', correctAnswer: 'two', options: ['none', 'one', 'three'] },
+  { src: '/images/angry.png', correctAnswer: 'angry', options: ['smiling', 'sad', 'surprised'] },
+  { src: '/images/disgusted.png', correctAnswer: 'disgusted', options: ['angry', 'smiling', 'surprised'] },
+  { src: '/images/confusion.png', correctAnswer: 'confused', options: ['smiling', 'sad', 'angry'] },
+  { src: '/images/sad.png', correctAnswer: 'sad', options: ['smiling', 'angry', 'disgusted'] }
 ];
 
-const exposureTimes = [34, 50, 100, 150];
+const exposureTimes = [17, 34, 50, 100];
 const initialPauseTime = 3000; // Początkowa przerwa przed pierwszym obrazem w milisekundach (3 sekundy)
 const infoDisplayTime = 3000; // Czas wyświetlania informacji o czasie ekspozycji
 const pauseTime = 3000; // Czas przerwy w milisekundach (3 sekundy)
