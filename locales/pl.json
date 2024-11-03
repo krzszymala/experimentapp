@@ -71,6 +71,7 @@
     "experiment_options": {
       "mountains": "Góry",
       "car": "Samochód",
+      "square": "Kwadrat",
       "moon": "Księżyc",
       "triangle": "Trójkąt",
       "orange": "Pomarańcza",
@@ -116,7 +117,6 @@
       "surprised": "Zaskoczenie",
       "confused": "Zmieszanie",
       "Sad": "Smutek",
-      "square": "Kwadrat",
       "sad": "Smutek"
 
 
