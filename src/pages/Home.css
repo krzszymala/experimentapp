@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Dodaj to, aby zapobiec poziomemu przewijaniu */
+  overflow-x: hidden; /* Zapobiegaj poziomemu przewijaniu */
 }
 
 .registration-container {
@@ -15,7 +15,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
   margin-top: 0.25rem;
-  box-sizing: border-box; /* Dodaj to, aby padding nie wpływał na szerokość */
+  box-sizing: border-box; /* Zapobiega wpływowi paddingu na szerokość */
 }
 
 h1 {
@@ -89,30 +89,16 @@ input[type="checkbox"] {
   background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  .submit-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-
-  .info-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-}
-
 /* Styl dla dymka z informacjami o badaniu */
 .info-popup {
   display: none; /* Domyślnie ukrywamy dymek */
-  position: absolute;
-  bottom: 70px; /* Zmiana położenia dymka */
-  right: 10px;
+  position: fixed; /* Przylega do ekranu, aby był bardziej widoczny */
+  bottom: 20%; /* Pozycja bardziej centralna */
+  left: 50%;
+  transform: translateX(-50%);
   width: 90%;
-  max-width: 300px;
+  max-width: 400px; /* Zwiększenie maksymalnej szerokości */
+  max-height: 300px; /* Ograniczenie maksymalnej wysokości */
   padding: 1rem;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -120,6 +106,7 @@ input[type="checkbox"] {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: left;
   z-index: 10;
+  overflow-y: auto; /* Dodanie paska przewijania, jeśli zawartość jest zbyt długa */
 }
 
 .info-popup.visible {
@@ -161,7 +148,16 @@ input[type="checkbox"] {
   }
 
   .info-popup {
-    bottom: 50px; /* Dymek pozostaje nad przyciskiem */
+    bottom: 15%; /* Dostosowanie położenia dla mniejszych ekranów */
+    max-width: 90%; /* Zwiększenie dostępności na mniejszych ekranach */
+  }
+
+  .info-popup h2 {
+    font-size: 1rem; /* Zmniejszenie rozmiaru nagłówka na mniejszych ekranach */
+  }
+
+  .info-popup p {
+    font-size: 0.875rem; /* Zmniejszenie rozmiaru tekstu na mniejszych ekranach */
   }
 
   .submit-button {
@@ -175,7 +171,7 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center; /* Wycentrowanie przycisków poziomo */
   margin-top: 1rem; /* Odstęp powyżej przycisków */
-  z-index: 1000; /* Ensure it stays above other elements */
+  z-index: 1000; /* Zapewnienie, że przyciski pozostają nad innymi elementami */
 }
 
 .flag-container img {

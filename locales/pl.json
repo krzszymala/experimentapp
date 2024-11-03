@@ -115,7 +115,10 @@
       "smiling": "Uśmiech",
       "surprised": "Zaskoczenie",
       "confused": "Zmieszanie",
-      "Sad": "Smutek"
+      "Sad": "Smutek",
+      "square": "Kwadrat",
+      "sad": "Smutek"
+
 
     },
     "results": {
