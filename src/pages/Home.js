@@ -136,7 +136,10 @@ function Home() {
                     <option value="">{t('select')}</option>
                     <option value="mindfulness">{t('mindfulness')}</option>
                     <option value="zen">{t('zen')}</option>
-                    <option value="tm">{t('tm')}</option>
+                    <option value="fa">{t('fa')}</option>
+                    <option value="om">{t('om')}</option>
+                    <option value="yoga">{t('yoga')}</option>
+                    <option value="lkm">{t('lkm')}</option>
                     <option value="vipassana">{t('vipassana')}</option>
                     <option value="kundalini">{t('kundalini')}</option>
                     <option value="christian_meditation">{t('christian_meditation')}</option>
