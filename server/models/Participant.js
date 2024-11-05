@@ -25,7 +25,7 @@ const participantSchema = new mongoose.Schema({
   meditationType: {
     type: String,
     required: false,
-    enum: ['mindfulness', 'zen', 'tm', 'vipassana', 'kundalini', 'christian_meditation', 'other']  }
+    enum: ['mindfulness', 'zen', 'fa', 'tm', 'om', 'yoga', 'lkm', 'vipassana', 'kundalini', 'christian_meditation', 'other']  }
   
 });
 
